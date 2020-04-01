@@ -15,6 +15,9 @@
   "autoload": {
     "psr-4": {
       "LaravelSimpleBases\\": "src/"
-    }
+    },
+    "files": [
+      "src/Helpers/structures.php"
+    ]
   }
 }
