@@ -1,5 +1,5 @@
 {
-  "name": "fabio/laravel-simple-bases",
+  "name": "fabio-pv/laravel-simple-bases",
   "description": "Base class and useful to help build RESTful API in laravel",
   "authors": [
     {
@@ -13,7 +13,7 @@
   },
   "autoload": {
     "psr-4": {
-      "LaravelSimpleBases": "src/"
+      "fabio-pv\\LaravelSimpleBases\\": "src/"
     }
   }
 }
