@@ -14,7 +14,7 @@
   },
   "autoload": {
     "psr-4": {
-      "fabio-pv\\LaravelSimpleBases\\": "src/"
+      "LaravelSimpleBases\\": "src/"
     }
   }
 }
