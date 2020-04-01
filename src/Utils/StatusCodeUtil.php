@@ -1,7 +1,7 @@
 <?php
 
 
-namespace LaravelSimpleBases\src\Utils;
+namespace LaravelSimpleBases\Utils;
 
 class StatusCodeUtil
 {

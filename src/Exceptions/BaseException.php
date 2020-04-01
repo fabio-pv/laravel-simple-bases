@@ -1,7 +1,7 @@
 <?php
 
 
-namespace LaravelSimpleBases\src\Exceptions;
+namespace LaravelSimpleBases\Exceptions;
 
 use Exception;
 

@@ -1,10 +1,9 @@
 <?php
 
-namespace LaravelSimpleBases\src\Exceptions;
+namespace LaravelSimpleBases\Exceptions;
 
 
-use LaravelSimpleBases\src\Exceptions\BaseException;
-use LaravelSimpleBases\src\Utils\StatusCodeUtil;
+use LaravelSimpleBases\Utils\StatusCodeUtil;
 use Throwable;
 
 class MethodNotAllowException extends BaseException
