@@ -5,10 +5,10 @@ namespace LaravelSimpleBases\Http\Controllers;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Validations\BaseValidation;
-use App\Services\v1\BaseService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use LaravelSimpleBases\Http\Validations\BaseValidation;
+use LaravelSimpleBases\Services\BaseService;
 use LaravelSimpleBases\Utils\StatusCodeUtil;
 
 abstract class BaseController extends Controller
