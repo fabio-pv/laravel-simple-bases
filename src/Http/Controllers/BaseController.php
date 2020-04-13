@@ -7,9 +7,9 @@ namespace LaravelSimpleBases\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Validations\BaseValidation;
 use App\Services\v1\BaseService;
-use App\Utils\StatusCodeUtil;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use LaravelSimpleBases\Utils\StatusCodeUtil;
 
 abstract class BaseController extends Controller
 {
