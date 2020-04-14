@@ -28,7 +28,7 @@ class BaseService
      * @return Model
      * @throws \Exception
      */
-    public function retriveAll(): Model
+    public function retriveAll()
     {
         try {
 
@@ -45,7 +45,7 @@ class BaseService
      * @param $uuid
      * @throws \Exception
      */
-    public function searchByUuid($uuid): Model
+    public function searchByUuid($uuid)
     {
         try {
 
