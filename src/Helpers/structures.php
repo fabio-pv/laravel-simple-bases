@@ -70,3 +70,10 @@ if (!function_exists('response_exception')) {
 
     }
 }
+
+if (!function_exists('fractal_transformer')) {
+    function fractal_transformer($data, $transformer)
+    {
+        return fractal($data, $transformer)->toArray()['data'];
+    }
+}
