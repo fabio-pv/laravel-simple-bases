@@ -26,6 +26,7 @@ abstract class BaseController extends Controller
      * @var BaseValidation
      */
     protected $validation;
+    protected $transformeForShowMethod = null;
 
     /**
      * @var Model
@@ -65,7 +66,11 @@ abstract class BaseController extends Controller
         try {
 
             $this->retrive = $this->service->searchByUuid($uuid);
-            $response = fractal($this->retrive, $this->transformer);
+            $transformer = $this->transformer;
+            if ($this->transformeForShowMethod !== null) {
+                $transformer = $this->transformeForShowMethod;
+            }
+            $response = fractal($this->retrive, $transformer);
 
         } catch (\Exception $e) {
             throw $e;
