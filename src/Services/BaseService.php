@@ -4,11 +4,14 @@
 namespace LaravelSimpleBases\Services;
 
 
+
 use Illuminate\Database\Eloquent\Model;
 use LaravelSimpleBases\Exceptions\ModelNotFoundException;
 
 class BaseService
 {
+
+    use ComplexQueryService;
 
     /**
      * @var Model
@@ -69,6 +72,7 @@ class BaseService
     {
         try {
 
+            $data = $this->makeRealData($data);
             $model = $this->model->create($data);
 
         } catch (\Exception $e) {
@@ -94,6 +98,7 @@ class BaseService
                 throw new ModelNotFoundException();
             }
 
+            $this->makeRealData($data);
             $model = $model->update($data);
 
         } catch (\Exception $e) {

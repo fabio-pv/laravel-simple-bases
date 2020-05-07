@@ -23,6 +23,7 @@
       "LaravelSimpleBases\\": "src/"
     },
     "files": [
+      "src/Helpers/structures.php",
       "src/Helpers/structures.php"
     ]
   }
