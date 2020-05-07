@@ -20,7 +20,7 @@ abstract class ModelAuthenticatableBase extends Authenticatable
     use SoftDeletes;
 
     protected $dispatchesEvents = [
-        UuidModelEvent::class
+        'creating' => UuidModelEvent::class
     ];
 
     /**

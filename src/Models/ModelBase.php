@@ -19,7 +19,7 @@ abstract class ModelBase extends Model
     use SoftDeletes;
 
     protected $dispatchesEvents = [
-        UuidModelEvent::class
+        'creating' => UuidModelEvent::class
     ];
 
     /**
