@@ -24,7 +24,7 @@
     },
     "files": [
       "src/Helpers/structures.php",
-      "src/Helpers/from_to_data.php.php"
+      "src/Helpers/from_to_data.php"
     ]
   }
 }
