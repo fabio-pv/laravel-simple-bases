@@ -4,6 +4,7 @@
 namespace LaravelSimpleBases\Services;
 
 
+use LaravelSimpleBases\Exceptions\ModelNotFoundException;
 use LaravelSimpleBases\Models\ModelBase;
 
 trait ComplexQueryService
@@ -36,6 +37,9 @@ trait ComplexQueryService
          */
         $model = new $fromToData['model'];
         $model = $model->findByUuid($data);
+        if(empty($model)){
+            throw new ModelNotFoundException();
+        }
         $this->realProperties[$fromToData['property']] = $model->id;
 
     }
