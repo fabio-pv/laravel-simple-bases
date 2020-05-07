@@ -6,6 +6,7 @@ namespace LaravelSimpleBases\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use LaravelSimpleBases\Events\UuidModelEvent;
 
 /**
@@ -13,7 +14,7 @@ use LaravelSimpleBases\Events\UuidModelEvent;
  * @package App\Models\v2
  * @property Model $findByUuid
  */
-abstract class ModelBase extends Model
+abstract class ModelAuthenticatableBase extends Authenticatable
 {
 
     use SoftDeletes;
