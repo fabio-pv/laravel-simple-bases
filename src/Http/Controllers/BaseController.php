@@ -31,7 +31,7 @@ abstract class BaseController extends Controller
     /**
      * @var Model
      */
-    private $retrive;
+    protected $retrive;
 
 
     /**
