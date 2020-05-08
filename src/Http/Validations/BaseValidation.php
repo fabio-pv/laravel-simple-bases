@@ -4,7 +4,6 @@
 namespace LaravelSimpleBases\Http\Validations;
 
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use LaravelSimpleBases\Exceptions\ValidationFieldException;
@@ -17,6 +16,7 @@ abstract class BaseValidation
 
     protected $fieldsCreate = [];
     protected $fieldsUpdate = [];
+    protected $fieldMethod = [];
 
     public function validate(Request $request, $method)
     {
@@ -31,6 +31,10 @@ abstract class BaseValidation
             $fields = $this->fieldsUpdate;
         }
 
+        if (empty($fields)) {
+            $fields = $this->getFieldByMethod($method);
+        }
+
         $validator = \Validator::make($request->all(), $fields);
 
         if (!$validator->fails()) {
@@ -39,6 +43,11 @@ abstract class BaseValidation
 
         $this->makeMessage($validator->errors());
 
+    }
+
+    private function getFieldByMethod($method)
+    {
+        return $this->fieldMethod[$method] ?? [];
     }
 
     private function makeMessage(MessageBag $erros)
@@ -50,6 +59,4 @@ abstract class BaseValidation
         throw $exception;
 
     }
-
-
 }
