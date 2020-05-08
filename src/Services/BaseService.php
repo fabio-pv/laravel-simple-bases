@@ -99,7 +99,7 @@ class BaseService
             }
 
             $this->makeRealData($data);
-            $model = $model->update($data);
+            $model->update($data);
 
         } catch (\Exception $e) {
             throw $e;
