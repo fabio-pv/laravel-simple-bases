@@ -18,6 +18,8 @@ class BaseService
      */
     protected $model;
 
+    protected $lastRealData = [];
+
     /**
      * BaseService constructor.
      * @param $model
@@ -72,8 +74,8 @@ class BaseService
     {
         try {
 
-            $data = $this->makeRealData($data);
-            $model = $this->model->create($data);
+            $this->lastRealData = $this->makeRealData($data);
+            $model = $this->model->create($this->lastRealData);
 
         } catch (\Exception $e) {
             throw $e;
@@ -98,8 +100,8 @@ class BaseService
                 throw new ModelNotFoundException();
             }
 
-            $this->makeRealData($data);
-            $model->update($data);
+            $this->lastRealData = $this->makeRealData($data);
+            $model->update($this->lastRealData);
 
         } catch (\Exception $e) {
             throw $e;
