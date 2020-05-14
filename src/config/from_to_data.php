@@ -1,8 +1,10 @@
 <?php
 
 return [
-    'property_param' => [
-        'model' => 'Model',
-        'property' => 'property_database'
+    'model::class' => [
+        'property_param' => [
+            'model' => 'Model::class',
+            'property' => 'property_database'
+        ],
     ]
 ];
