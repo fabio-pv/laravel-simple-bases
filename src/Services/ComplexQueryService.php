@@ -14,8 +14,9 @@ trait ComplexQueryService
     protected function makeRealData(array $datas = [])
     {
         $this->realProperties = [];
+        $allDataThisModel = from_to_data($this->model);
         foreach ($datas as $key => $data) {
-            $fromToData = from_to_data($key);
+            $fromToData = $allDataThisModel[$key] ?? null;
             if (empty($fromToData)) {
                 continue;
             }
@@ -37,7 +38,7 @@ trait ComplexQueryService
          */
         $model = new $fromToData['model'];
         $model = $model->findByUuid($data);
-        if(empty($model)){
+        if (empty($model)) {
             throw new ModelNotFoundException();
         }
         $this->realProperties[$fromToData['property']] = $model->id;
