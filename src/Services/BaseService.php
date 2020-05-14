@@ -4,7 +4,6 @@
 namespace LaravelSimpleBases\Services;
 
 
-
 use Illuminate\Database\Eloquent\Model;
 use LaravelSimpleBases\Exceptions\ModelNotFoundException;
 
@@ -12,6 +11,7 @@ class BaseService
 {
 
     use ComplexQueryService;
+    use FileInterceptor;
 
     /**
      * @var Model
@@ -75,13 +75,14 @@ class BaseService
         try {
 
             $this->lastRealData = $this->makeRealData($data);
-            $model = $this->model->create($this->lastRealData);
+            $this->model = $this->model->create($this->lastRealData);
+            $this->interceptFile();
 
         } catch (\Exception $e) {
             throw $e;
         }
 
-        return $model;
+        return $this->model;
 
     }
 
