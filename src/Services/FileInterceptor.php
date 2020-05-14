@@ -19,7 +19,10 @@ trait FileInterceptor
 
     private function initializeVariable()
     {
-        $config = config('model_with_file')[get_class($this->model)];
+        $config = config('model_with_file')[get_class($this->model)] ?? null;
+        if(empty($config)){
+            return;
+        }
         $this->fantasyProperty = $config['fantasy_property'];
         $this->saveLocation = $config['save_location'];
         $this->extension = $config['extension'];
@@ -28,12 +31,12 @@ trait FileInterceptor
     protected function interceptFile()
     {
 
+        $this->initializeVariable();
+
         $photoOrPhotos = $this->lastRealData[$this->fantasyProperty] ?? null;
         if (empty($photoOrPhotos)) {
             return;
         }
-
-        $this->initializeVariable();
 
         if (is_array($photoOrPhotos)) {
             foreach ($photoOrPhotos as $photo) {
