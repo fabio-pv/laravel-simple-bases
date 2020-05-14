@@ -27,12 +27,13 @@ trait FileInterceptor
 
     protected function interceptFile()
     {
-        $this->initializeVariable();
-        $photoOrPhotos = $this->lastRealData[$this->fantasyProperty] ?? null;
 
+        $photoOrPhotos = $this->lastRealData[$this->fantasyProperty] ?? null;
         if (empty($photoOrPhotos)) {
             return;
         }
+
+        $this->initializeVariable();
 
         if (is_array($photoOrPhotos)) {
             foreach ($photoOrPhotos as $photo) {
