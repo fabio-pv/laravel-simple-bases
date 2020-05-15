@@ -12,6 +12,7 @@ use LaravelSimpleBases\Events\UuidModelEvent;
  * Class ModelBase
  * @package App\Models\v2
  * @property Model $findByUuid
+ * @property File $files
  */
 abstract class ModelBase extends Model
 {
@@ -31,5 +32,10 @@ abstract class ModelBase extends Model
         return self::where('uuid', $uuid)->get()->first();
     }
 
+    public function files()
+    {
+        return $this->hasMany(File::class, 'reference_id')
+            ->where('reference', get_class($this));
+    }
 
 }
