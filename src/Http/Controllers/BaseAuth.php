@@ -22,7 +22,7 @@ abstract class BaseAuth extends Controller
 
     }
 
-    private function respondWithToken($token)
+    protected function respondWithToken($token)
     {
         return response()->json([
             'access_token' => $token,
