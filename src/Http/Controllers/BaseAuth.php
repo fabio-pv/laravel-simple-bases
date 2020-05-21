@@ -11,6 +11,8 @@ use LaravelSimpleBases\Utils\StatusCodeUtil;
 
 abstract class BaseAuth extends Controller
 {
+    protected $meTransformer;
+
     public function login()
     {
         $credentials = request(['email', 'password']);
@@ -38,11 +40,16 @@ abstract class BaseAuth extends Controller
         try {
 
             $userModel = \Auth::user();
-            $data = fractal($userModel, UserTransformer::class);
+            $data = fractal($userModel, $this->meTransformer);
 
         } catch (\Exception $e) {
             throw $e;
         }
         return response_default($data, StatusCodeUtil::OK);
+    }
+
+    public function refresh()
+    {
+        return $this->respondWithToken(auth()->refresh());
     }
 }
