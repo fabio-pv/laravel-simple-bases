@@ -157,7 +157,7 @@ abstract class BaseController extends Controller
 
     }
 
-    private function hasPermissonSet(): void
+    protected function hasPermissonSet(): void
     {
         if (empty($this->permission)) {
             return;
