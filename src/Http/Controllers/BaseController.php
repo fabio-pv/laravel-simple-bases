@@ -27,6 +27,10 @@ abstract class BaseController extends Controller
      */
     protected $validation;
     protected $transformeForShowMethod = null;
+    /**
+     * @var \LaravelSimpleBases\Http\Permissions\BasePermission $permission
+     */
+    protected $permission = [];
 
     /**
      * @var Model
@@ -41,7 +45,7 @@ abstract class BaseController extends Controller
     public function index()
     {
         try {
-
+            $this->hasPermissonSet();
             $this->retrive = $this->service->retriveAll();
             $this->filter();
             $this->order();
@@ -65,6 +69,7 @@ abstract class BaseController extends Controller
     {
         try {
 
+            $this->hasPermissonSet();
             $this->retrive = $this->service->searchByUuid($uuid);
             $transformer = $this->transformer;
             if ($this->transformeForShowMethod !== null) {
@@ -89,8 +94,8 @@ abstract class BaseController extends Controller
     {
         try {
 
+            $this->hasPermissonSet();
             $this->validation->validate($request, __FUNCTION__);
-
             $data = $request->all();
             $this->retrive = $this->service->save($data);
 
@@ -114,8 +119,8 @@ abstract class BaseController extends Controller
     {
         try {
 
+            $this->hasPermissonSet();
             $this->validation->validate($request, __FUNCTION__);
-
             $data = $request->all();
             $this->retrive = $this->service->change($data, $uuid);
 
@@ -139,6 +144,7 @@ abstract class BaseController extends Controller
 
         try {
 
+            $this->hasPermissonSet();
             $this->retrive = $this->service->remove($uuid);
 
             $response = fractal($this->retrive, $this->transformer);
@@ -148,6 +154,16 @@ abstract class BaseController extends Controller
         }
 
         return response_default($response, StatusCodeUtil::CREATED);
+
+    }
+
+    private function hasPermissonSet(): void
+    {
+        if (empty($this->permission)) {
+            return;
+        }
+
+        $this->permission->verify(get_name_previous_function());
 
     }
 
