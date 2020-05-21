@@ -96,19 +96,20 @@ class BaseService
     {
         try {
 
-            $model = $this->model->findByUuid($uuid);
-            if (empty($model)) {
+            $this->model = $this->model->findByUuid($uuid);
+            if (empty($this->model)) {
                 throw new ModelNotFoundException();
             }
 
             $this->lastRealData = $this->makeRealData($data);
-            $model->update($this->lastRealData);
+            $this->model->update($this->lastRealData);
+            $this->interceptFile();
 
         } catch (\Exception $e) {
             throw $e;
         }
 
-        return $model;
+        return $this->model;
 
     }
 

@@ -13,6 +13,7 @@ use LaravelSimpleBases\Events\UuidModelEvent;
  * Class ModelBase
  * @package App\Models\v2
  * @property Model $findByUuid
+ * @property File $files
  */
 abstract class ModelAuthenticatableBase extends Authenticatable
 {
@@ -32,5 +33,10 @@ abstract class ModelAuthenticatableBase extends Authenticatable
         return self::where('uuid', $uuid)->get()->first();
     }
 
+    public function files()
+    {
+        return $this->hasMany(File::class, 'reference_id')
+            ->where('reference', get_class($this));
+    }
 
 }
