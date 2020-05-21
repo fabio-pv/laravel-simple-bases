@@ -163,7 +163,7 @@ abstract class BaseController extends Controller
             return;
         }
 
-        $this->permission->verify(get_name_previous_function());
+        $this->permission->verify(debug_backtrace()[1]['function']);
 
     }
 
