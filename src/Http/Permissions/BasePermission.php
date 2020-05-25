@@ -16,6 +16,9 @@ abstract class BasePermission
     {
 
         $userModel = Auth::user();
+        if (empty($userModel)) {
+            return;
+        }
         $currentUserRole = $userModel->userRole->id;
         $needRole = $this->permissions[$functionName] ?? null;
 
