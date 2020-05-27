@@ -7,6 +7,7 @@ namespace LaravelSimpleBases\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use LaravelSimpleBases\Events\UuidModelEvent;
+use LaravelSimpleBases\Exceptions\ModelNotFoundException;
 
 /**
  * Class ModelBase
@@ -27,9 +28,15 @@ abstract class ModelBase extends Model
      * @param string $uuid
      * @return Model
      */
-    public static function findByUuid(string $uuid): Model
+    public static function findByUuid(string $uuid, bool $withModelNotFound = false)
     {
-        return self::where('uuid', $uuid)->get()->first();
+        $model = self::where('uuid', $uuid)->get()->first();
+
+        if ($withModelNotFound === true and empty($model)) {
+            throw new ModelNotFoundException();
+        }
+
+        return $model;
     }
 
     public function files()
