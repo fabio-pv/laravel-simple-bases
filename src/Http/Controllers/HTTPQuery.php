@@ -8,7 +8,8 @@ const OPERATOR = [
     'equal' => '=',
     'not_equal' => '!=',
     'greater_than_or_equal_to' => '>=',
-    'less_than_or_equal_to' => '<='
+    'less_than_or_equal_to' => '<=',
+    'like' => 'like'
 ];
 
 const PAGINATE_DEFAULT = 10;
@@ -39,6 +40,11 @@ trait HTTPQuery
         $key = $keyAndOperator[0];
         $operator = OPERATOR[$keyAndOperator[1]];
         $value = array_values($filter)[0];
+
+        if($operator === 'like'){
+            $this->retrive = $this->retrive->where($key, $operator, "%$value%");
+            return;
+        }
 
         $this->retrive = $this->retrive->where($key, $operator, $value);
 
