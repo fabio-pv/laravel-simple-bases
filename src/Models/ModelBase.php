@@ -39,6 +39,9 @@ abstract class ModelBase extends Model
         return $model;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function files()
     {
         return $this->hasMany(File::class, 'reference_id')

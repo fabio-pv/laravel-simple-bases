@@ -14,12 +14,13 @@ use LaravelSimpleBases\Models\ModelBase;
  * @property string $created_at
  * @property string $updated_at
  * @property string $deleted_at
+ * @property string $getUrl
  */
 class File extends ModelBase
 {
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -27,6 +28,29 @@ class File extends ModelBase
     /**
      * @var array
      */
-    protected $fillable = ['uuid', 'file', 'extension', 'reference_id', 'reference', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = [
+        'uuid',
+        'file',
+        'extension',
+        'reference_id',
+        'reference',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return config('app.url')
+            . '/v1/file'
+            . config('model_with_file')[$this->reference]['save_location']
+            . '/'
+            . $this->file
+            . $this->extension;
+
+    }
 
 }
