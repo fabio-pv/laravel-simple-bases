@@ -33,6 +33,9 @@ trait ComplexQueryService
 
     private function getRealData($fromToData, $data)
     {
+        if(empty($data)){
+            return;
+        }
         /**
          * @var ModelBase $model
          */
