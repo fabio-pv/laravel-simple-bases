@@ -25,7 +25,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "laravel-simple-bases\\Providers\\LaravelSimpleBaseProvider"
+        "LaravelSimpleBases\\Providers\\LaravelSimpleBaseProvider"
       ]
     }
   }
