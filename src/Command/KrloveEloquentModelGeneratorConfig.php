@@ -37,7 +37,15 @@ class KrloveEloquentModelGeneratorConfig extends Command
      */
     public function handle()
     {
-        dd('oioioioioi');
+        $source = getcwd() . '/vendor/fabio/laravel-simple-bases/src/config/eloquent_model_generator.php';
+        $dest = getcwd() . '/config/eloquent_model_generator.php';
+        $result = copy($source, $dest);
+
+        if ($result === true) {
+            echo 'Generate file in ' . $dest;
+            echo PHP_EOL;
+        }
+
         return 0;
     }
 }
