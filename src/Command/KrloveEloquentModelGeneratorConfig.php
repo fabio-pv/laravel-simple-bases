@@ -4,7 +4,7 @@ namespace LaravelSimpleBases\Commands;
 
 use Illuminate\Console\Command;
 
-class KrloveEloquentModelGenerator extends Command
+class KrloveEloquentModelGeneratorConfig extends Command
 {
     /**
      * The name and signature of the console command.
