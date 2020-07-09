@@ -18,8 +18,7 @@ class KrloveEloquentModelGeneratorConfig extends Command
      *
      * @var string
      */
-    protected $description = 'Create a configuration file for the package krlove/eloquent-model-generator with 
-                              laravel-simple-bases configurations';
+    protected $description = 'Create a configuration file for the package krlove/eloquent-model-generator';
 
     /**
      * Create a new command instance.

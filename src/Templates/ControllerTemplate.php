@@ -5,7 +5,8 @@ namespace LaravelSimpleBases\Templates;
 class ControllerTemplate extends BaseTemplate
 {
 
-    private const template = '<?php
+    protected $type = BaseTemplate::CONTROLLER_TYPE;
+    protected $template = '<?php
 
 namespace App\Http\Controllers\v1;
 
@@ -30,12 +31,6 @@ class __CLASS__Controller extends BaseController
     }
 }
 ';
-
-    public function __construct()
-    {
-        $this->template = self::template;
-        $this->type = BaseTemplate::CONTROLLER_TYPE;
-    }
 
     public static function instance()
     {

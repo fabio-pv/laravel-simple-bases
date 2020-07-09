@@ -4,8 +4,15 @@ namespace LaravelSimpleBases\Templates;
 
 abstract class BaseTemplate
 {
+    private const types = [
+        'Controller' => '/app/Http/Controllers/v1/',
+        'Service' => '/app/Services/v1/',
+        'Validation' => '/app/Http/Validations/v1/'
+    ];
 
     protected const CONTROLLER_TYPE = 'Controller';
+    protected const SERVICE_TYPE = 'Service';
+    protected const VALIDATION_TYPE = 'Validation';
 
     private const CODE_MARKER_CLASS = '__CLASS__';
     private const CODE_MARKER_VARIABLE = '__VARIABLE__';
@@ -18,7 +25,7 @@ abstract class BaseTemplate
         $codeCreate = $this->createCode($newName);
         $fileName = $this->createFile($newName, $codeCreate);
 
-        echo 'Create controller: ' . $fileName;
+        echo 'Create ' . $this->type . ': ' . $fileName;
         echo PHP_EOL;
     }
 
@@ -33,8 +40,8 @@ abstract class BaseTemplate
 
     private function createFile(string $name, string $codeCreate): string
     {
-        $fileName = $name . self::CONTROLLER_TYPE . '.php';
-        $dir = getcwd() . '/app/Http/Controllers/v1/' . $fileName;
+        $fileName = $name . $this->type . '.php';
+        $dir = getcwd() . self::types[$this->type] . $fileName;
 
         file_put_contents($dir, $codeCreate, FILE_TEXT);
 
