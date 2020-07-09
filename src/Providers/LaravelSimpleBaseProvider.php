@@ -6,6 +6,7 @@ namespace LaravelSimpleBases\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use LaravelSimpleBases\Commands\FromToDataConfig;
+use LaravelSimpleBases\Commands\GenerateEndpointClass;
 use LaravelSimpleBases\Commands\KrloveEloquentModelGeneratorConfig;
 use LaravelSimpleBases\Commands\ModelWithFileConfig;
 
@@ -18,6 +19,7 @@ class LaravelSimpleBaseProvider extends ServiceProvider
             KrloveEloquentModelGeneratorConfig::class,
             FromToDataConfig::class,
             ModelWithFileConfig::class,
+            GenerateEndpointClass::class,
         ]);
     }
 
