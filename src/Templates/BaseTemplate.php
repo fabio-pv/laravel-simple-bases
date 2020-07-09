@@ -41,9 +41,15 @@ abstract class BaseTemplate
     private function createFile(string $name, string $codeCreate): string
     {
         $fileName = $name . $this->type . '.php';
-        $dir = getcwd() . self::types[$this->type] . $fileName;
+        $dir = getcwd() . self::types[$this->type];
 
-        file_put_contents($dir, $codeCreate, FILE_TEXT);
+        $dirFile = $dir . $fileName;
+
+        if (!is_dir($dir)) {
+            mkdir($dir);
+        }
+
+        file_put_contents($dirFile, $codeCreate, FILE_TEXT);
 
         return $fileName;
 
