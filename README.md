@@ -22,3 +22,62 @@ Containing the following resources:
 ## Configuration authentication with JWT
 This package is dependent on the package https://github.com/tymondesigns/jwt-auth, but don't worry, it has already been installed together. It will only take a few implementations for you to have working token authentication.
 
+### Step 1
+In your file routes `routes/api.php`, create a login route. Ex.:
+```php
+Route::post('v1/login', 'v1\AuthController@login');
+```
+
+### Step 2
+Then create a controller for authentication you can use the artisan command for this:
+```
+php artisan make: controller v1 / AuthController
+```
+
+### Step 3
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+```
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+```
+Generate secret key
+```
+php artisan jwt:secret
+```
+
+```
+'defaults' => [
+        'guard' => 'api',
+        'passwords' => 'users',
+    ],
+```
+
+
+```php
+'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+            'hash' => false,
+        ],
+    ],
+```
+
+```php
+'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\v1\User::class,
+        ],
+
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
+    ],
+    ```
+
