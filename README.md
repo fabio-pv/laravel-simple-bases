@@ -49,7 +49,6 @@ php artisan jwt:secret
 ### Step 5
 In config/auth.php make the changes
 
-**To**
 ```
 'defaults' => [
         'guard' => 'api',
@@ -57,7 +56,6 @@ In config/auth.php make the changes
     ],
 ```
 
-**To**
 ```php
 'guards' => [
         'web' => [
@@ -75,9 +73,6 @@ In config/auth.php make the changes
 
 **Optional but recommended**</br>
 Change the path for the User model. </br>
-
-**To**
-
 
 ```php
 'providers' => [
