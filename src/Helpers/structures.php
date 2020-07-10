@@ -72,8 +72,14 @@ if (!function_exists('response_exception')) {
 }
 
 if (!function_exists('fractal_transformer')) {
-    function fractal_transformer($data, $transformer)
+    function fractal_transformer($data, $transformer, $valueToEmpty = [])
     {
-        return fractal($data, $transformer)->toArray()['data'];
+        $result = fractal($data, $transformer)->toArray()['data'];
+
+        if (empty($result)) {
+            return $valueToEmpty;
+        }
+
+        return $result;
     }
 }

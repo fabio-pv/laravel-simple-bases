@@ -21,5 +21,12 @@
       "src/Helpers/from_to_data.php",
       "src/Helpers/generic.php"
     ]
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "LaravelSimpleBases\\Providers\\LaravelSimpleBaseProvider"
+      ]
+    }
   }
 }
