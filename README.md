@@ -23,15 +23,15 @@ Containing the following resources:
 This package is dependent on the package https://github.com/tymondesigns/jwt-auth, but don't worry, it has already been installed together. It will only take a few implementations for you to have working token authentication.
 
 ### Step 1
-In your file routes `routes/api.php`, create a login route. Ex.:
-```php
-Route::post('v1/login', 'v1\AuthController@login');
+Then create a controller for authentication you can use the artisan command for this:
+```
+php artisan make: controller v1/AuthController
 ```
 
 ### Step 2
-Then create a controller for authentication you can use the artisan command for this:
-```
-php artisan make: controller v1 / AuthController
+In your file routes `routes/api.php`, create a login route. Ex.:
+```php
+Route::post('v1/login', 'v1\AuthController@login');
 ```
 
 ### Step 3
@@ -39,11 +39,25 @@ php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServicePro
 ```
 php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
 ```
+
+### Step 4
 Generate secret key
 ```
 php artisan jwt:secret
 ```
 
+### Step 5
+In config/auth.php make the changes
+
+**From**
+```
+'defaults' => [
+        'guard' => 'web',
+        'passwords' => 'users',
+    ],
+```
+
+**To**
 ```
 'defaults' => [
         'guard' => 'api',
@@ -51,7 +65,24 @@ php artisan jwt:secret
     ],
 ```
 
+**From**
 
+```php
+'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
+        ],
+    ],
+```
+
+**To**
 ```php
 'guards' => [
         'web' => [
@@ -67,6 +98,26 @@ php artisan jwt:secret
     ],
 ```
 
+**Optional but recommended**
+Change the path for the User model. 
+**From**
+
+```php
+'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\User::class,
+        ],
+
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
+    ],
+```    
+**To**
+
+
 ```php
 'providers' => [
         'users' => [
@@ -79,5 +130,7 @@ php artisan jwt:secret
         //     'table' => 'users',
         // ],
     ],
-    ```
+```    
+
+
 
