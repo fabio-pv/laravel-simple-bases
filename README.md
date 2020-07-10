@@ -98,8 +98,8 @@ In config/auth.php make the changes
     ],
 ```
 
-**Optional but recommended**
-Change the path for the User model. 
+**Optional but recommended**</br>
+Change the path for the User model. </br>
 **From**
 
 ```php
@@ -131,6 +131,14 @@ Change the path for the User model.
         // ],
     ],
 ```    
+
+### Step 6
+**Optional**, if using config with cache, execute:
+```
+php artisan config:cache
+```
+
+
 
 
 
