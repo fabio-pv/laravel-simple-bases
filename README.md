@@ -49,36 +49,11 @@ php artisan jwt:secret
 ### Step 5
 In config/auth.php make the changes
 
-**From**
-```
-'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
-    ],
-```
-
 **To**
 ```
 'defaults' => [
         'guard' => 'api',
         'passwords' => 'users',
-    ],
-```
-
-**From**
-
-```php
-'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-            'hash' => false,
-        ],
     ],
 ```
 
@@ -100,21 +75,7 @@ In config/auth.php make the changes
 
 **Optional but recommended**</br>
 Change the path for the User model. </br>
-**From**
 
-```php
-'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\User::class,
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
-    ],
-```    
 **To**
 
 
