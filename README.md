@@ -120,11 +120,33 @@ If you want to validate the request body, you must implement its rules in **App/
 This validation works using Laravel [validation](https://laravel.com/docs/7.x/validation) through the base class   
 ```php
 $this->fieldsCreate = [
-            'name' => 'required',
-            'license_plate' => 'required',
-            'motor_power' => 'required',
-        ];
+        'name' => 'required',
+        'license_plate' => 'required',
+        'motor_power' => 'required',
+];
 ```
+
+### Step 4
+Create the return object from your endpoint using [laravel-fractal](https://github.com/spatie/laravel-fractal) which was created in App/Http/Transformers/v1
+```php
+public function transform(Car $car)
+    {
+        return [
+            'name' => $car->name,
+            'license_plate' => $car->license_plate,
+            'motor_power' => $car->motor_power,
+        ];
+    }
+```
+
+
+### Step 5
+Create your route in routes/api.php
+```php
+Route::resource('v1/car', 'v1\CarController');
+```
+
+
 
 
 
