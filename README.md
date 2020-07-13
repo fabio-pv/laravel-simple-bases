@@ -25,7 +25,7 @@ This package is dependent on the package https://github.com/tymondesigns/jwt-aut
 ### Step 1
 Then create a controller for authentication you can use the artisan command for this:
 ```
-php artisan make: controller v1/AuthController
+php artisan make:controller v1/AuthController
 ```
 
 ### Step 2
@@ -93,6 +93,23 @@ Change the path for the User model. </br>
 ```
 php artisan config:cache
 ```
+
+## Creating an endpoint
+
+### Step 1
+Create a table for your new endpoint
+```
+php artisan make:migration create_cars_table
+```
+
+### Step 2
+The **fabio-pv:generate-endpoint-class** command will automatically create all necessary dependencies for the endpoint.</br>
+It will only be necessary to provide a name for the class and the name of the table that the model will reference.</br>
+```
+ php artisan fabio-pv:generate-endpoint-class Car --table-name=cars
+```
+
+
 
 
 
