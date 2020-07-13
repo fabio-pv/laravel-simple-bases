@@ -148,7 +148,7 @@ Route::resource('v1/car', 'v1\CarController');
 
 ### Step 6 
 Test, if everything goes well you will have an endpoint working with the functions:
-* GET 
+* GET with pagination
 ```
 /api/v1/car
 ```
@@ -166,9 +166,35 @@ Test, if everything goes well you will have an endpoint working with the functio
 ```
 * DELETE 
 ```
-/api/v1/car/{uuid
+/api/v1/car/{uuid}
 ```
 
-
-
-
+**Ex.:**
+```json
+{
+    "data": [
+        {
+            "uuid": "d96598d0-c527-11ea-b192-517bb6c42efa",
+            "name": "Mustang boss 302 68",
+            "license_plate": "ter-1234",
+            "motor_power": 290
+        },
+        {
+            "uuid": "44d54ed0-c528-11ea-96f6-658ec4d2da56",
+            "name": "Camaro ss 68",
+            "license_plate": "ter-4321",
+            "motor_power": 295
+        }
+    ],
+    "meta": {
+        "pagination": {
+            "total": 2,
+            "count": 2,
+            "per_page": 10,
+            "current_page": 1,
+            "total_pages": 1,
+            "links": {}
+        }
+    }
+}
+```
