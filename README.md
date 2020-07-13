@@ -146,7 +146,28 @@ Create your route in routes/api.php
 Route::resource('v1/car', 'v1\CarController');
 ```
 
-
+### Step 6 
+Test, if everything goes well you will have an endpoint working with the functions:
+* GET 
+```
+/api/v1/car
+```
+* GET 
+```
+/api/v1/car/{uuid}
+```
+* POST  
+```
+/api/v1/car
+```
+* PATCH 
+```
+/api/v1/car/{uuid}
+```
+* DELETE 
+```
+/api/v1/car/{uuid
+```
 
 
 
