@@ -16,6 +16,9 @@ Containing the following resources:
 * Base class for the handler for Exceptions
 * Among other features
 
+## Sample repository
+[Sample](https://github.com/fabio-pv/laravel-simple-bases-exemple)
+
 ## Installation
 `composer require fabio/laravel-simple-bases`
 
