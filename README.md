@@ -1,11 +1,9 @@
 <h1 align="center">Laravel Simple Bases</h1>
 <h5 align="center">A set of base classes to help create projects with Laravel</h5>
 
-
-[![Latest Stable Version](https://poser.pugx.org/fabio/laravel-simple-bases/v)](//packagist.org/packages/fabio/laravel-simple-bases)
-[![Total Downloads](https://poser.pugx.org/fabio/laravel-simple-bases/downloads)](//packagist.org/packages/fabio/laravel-simple-bases)
-[![License](https://poser.pugx.org/fabio/laravel-simple-bases/license)](//packagist.org/packages/fabio/laravel-simple-bases)
-
+<p align="center">
+        <img src="https://img.shields.io/github/v/release/fabio-pv/laravel-simple-bases">
+</p>
 
 ## About
 This package creates an initial base and utilities for your Laravel projects with a focus on REST api.</br> 
