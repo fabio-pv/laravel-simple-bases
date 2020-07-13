@@ -108,9 +108,23 @@ It will only be necessary to provide a name for the class and the name of the ta
 ```
  php artisan fabio-pv:generate-endpoint-class Car --table-name=cars
 ```
+This command will create 5 class in your project with versioning in the v1 directory.
+* Model
+* Controller
+* Service
+* Validation
+* Transformer
 
-
-
+### Step 3 **Optional**
+If you want to validate the request body, you must implement its rules in **App/Http/Validations/v1** </br>
+This validation works using Laravel [validation](https://laravel.com/docs/7.x/validation) through the base class   
+```php
+$this->fieldsCreate = [
+            'name' => 'required',
+            'license_plate' => 'required',
+            'motor_power' => 'required',
+        ];
+```
 
 
 
