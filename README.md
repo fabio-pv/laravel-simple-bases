@@ -120,8 +120,7 @@ php artisan make:migration create_cars_table
 ```
 
 ### Step 2
-The **fabio-pv:generate-endpoint-class** command will automatically create all necessary dependencies for the endpoint.</br>
-It will only be necessary to provide a name for the class and the name of the table that the model will reference.</br>
+The **fabio-pv:generate-endpoint-class** command will automatically create all necessary dependencies for the endpoint.It will only be necessary to provide a name for the class and the name of the table that the model will reference.</br>
 ```
  php artisan fabio-pv:generate-endpoint-class Car --table-name=cars
 ```
