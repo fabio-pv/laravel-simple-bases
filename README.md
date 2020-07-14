@@ -5,6 +5,9 @@
         <img src="https://img.shields.io/github/v/release/fabio-pv/laravel-simple-bases">
 </p>
 
+## summary
+[authentication using JWT](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#configuration-authentication-with-jwt)
+
 ## About
 This package creates an initial base and utilities for your Laravel projects with a focus on REST api.</br> 
 Containing the following resources:
