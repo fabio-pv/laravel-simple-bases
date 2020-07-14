@@ -293,7 +293,7 @@ How to configure ?</br>
 
 Your ``` config/from_to_data.php ``` file should look like this</br>
 
-```
+```php
 return [
     \App\Models\v1\User::class => [
 
