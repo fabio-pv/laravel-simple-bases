@@ -253,3 +253,8 @@ O padrão é 10 por página
 
 **value** = Can receive ``` false ``` to disable a page or a number to change an amount per page
 
+### Intercept uuid for id
+On request where it is necessary to pass the relationship of another table is common to do by uuid but internally we need the id, to facilitate this 'transformation' this package has a config file where this transformation can be configured so that it happens automatically. Continue reading to learn more
+
+
+
