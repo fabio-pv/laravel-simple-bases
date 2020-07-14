@@ -36,7 +36,7 @@ Containing the following resources:
 ## Installation
 `composer require fabio/laravel-simple-bases`
 
-## Configuration authentication with JWT [:arrow_up:]()
+## Configuration authentication with JWT [:arrow_up:](#summary)
 This package is dependent on the package [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth), but don't worry, it has already been installed together. It will only take a few implementations for you to have working token authentication.
 
 ### Step 1
