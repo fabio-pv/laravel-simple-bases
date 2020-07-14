@@ -7,7 +7,7 @@
 
 ## summary   
 
-:lock: &nbsp; [Authentication using JWT](#configuration-authentication-with-jwt)</br>
+:lock: &nbsp; [Authentication using JWT](#authentication-with-jwt)</br>
 :satellite: &nbsp; [Creating an endpoint](#creating-an-endpoint)</br>
 :wrench: &nbsp; [Utilities on request](#utilities-on-request)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:mag_right: &nbsp; [Filters](#filters)</br>
