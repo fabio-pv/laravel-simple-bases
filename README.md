@@ -8,8 +8,8 @@
 ## summary   
 
 [Authentication using JWT](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#configuration-authentication-with-jwt)</br>
-[Creating an endpoint](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#creating-an-endpoint)
-[Utilities on request](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#utilities-on-request)
+[Creating an endpoint](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#creating-an-endpoint)</br>
+[Utilities on request](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#utilities-on-request)</br>
 
 
 ## About
