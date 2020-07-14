@@ -7,10 +7,11 @@
 
 ## summary   
 
-:lock: [Authentication using JWT](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#configuration-authentication-with-jwt)</br>
-:satellite: [Creating an endpoint](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#creating-an-endpoint)</br>
-:wrench: [Utilities on request](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#utilities-on-request)</br>
-
+:lock: &nbsp; [Authentication using JWT](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#configuration-authentication-with-jwt)</br>
+:satellite: &nbsp; [Creating an endpoint](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#creating-an-endpoint)</br>
+:wrench: &nbsp; [Utilities on request](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#utilities-on-request)</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:mag_right: [Utilities on request](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#filters)</br>
+:floppy_disk: &nbsp; [Intercept uuid for id](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#Intercept-uuid-for-id)</br>
 
 ## About
 This package creates an initial base and utilities for your Laravel projects with a focus on REST api.</br> 
@@ -253,7 +254,7 @@ O padrão é 10 por página
 
 **value** = Can receive ``` false ``` to disable a page or a number to change an amount per page
 
-### Intercept uuid for id
+## Intercept uuid for id
 On request where it is necessary to pass the relationship of another table is common to do by uuid but internally we need the id, to facilitate this 'transformation' this package has a config file where this transformation can be configured so that it happens automatically. Continue reading to learn more
 
 ### MER for this example
