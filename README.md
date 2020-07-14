@@ -256,5 +256,55 @@ O padrão é 10 por página
 ### Intercept uuid for id
 On request where it is necessary to pass the relationship of another table is common to do by uuid but internally we need the id, to facilitate this 'transformation' this package has a config file where this transformation can be configured so that it happens automatically. Continue reading to learn more
 
+### MER for this example
+
+<img src="https://user-images.githubusercontent.com/56044466/87470933-e5b83180-c5f3-11ea-856c-3789587f4df2.png"/>
+
+### Step 1
+Publish configuration file
+
+```
+php artisan fabio-pv:from-to-data-config
+```
+
+### Step 2
+Configure the file ``` config/from_to_data.php ```
+
+```php
+return [
+    'model::class' => [
+        'property_param' => [
+            'model' => 'Model::class',
+            'property' => 'property_database'
+        ],
+    ]
+];
+
+```
+
+How to configure ?</br>
+
+**model::class** = Model that receives the relationship</br>
+**property_param** = Parameter name in request</br>
+**Model::class** = Model where the relationship comes from</br>
+**property_database** = Property name in the model</br>
+
+Your ``` config/from_to_data.php ``` file should look like this</br>
+
+```
+return [
+    \App\Models\v1\User::class => [
+
+        'car_uuid' => [
+            'model' => \App\Models\v1\Car::class,
+            'property' => 'car_id'
+        ],
+
+    ]
+];
+```
+
+### Step 3
+Test, if everything went well using the method post or patch and passing the relationship you should have the relationship in your database automatically
 
 
