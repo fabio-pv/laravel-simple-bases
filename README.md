@@ -7,6 +7,7 @@
 
 ## summary
 [authentication using JWT](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#configuration-authentication-with-jwt)
+[Creating an endpoint](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#creating-an-endpoint)
 
 ## About
 This package creates an initial base and utilities for your Laravel projects with a focus on REST api.</br> 
