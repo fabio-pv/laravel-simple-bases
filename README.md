@@ -205,3 +205,44 @@ Test, if everything goes well you will have an endpoint working with the functio
     }
 }
 ```
+
+## Utilities on request
+All endpoints that extend ```BaseController``` have filters ready to be used.</br>
+Note:</br>
+In the current version the filter only works for the model's main table.</br>
+
+### Filters
+
+```
+{{url}}/api/v1/car?filters[index_filter][name_column@name_operator]=value
+{{url}}/api/v1/car?filters[0][name@equal]=Mustang boss 302 68
+```
+
+**index_filter** = Array index for the filter string</br>
+**name_column** = Name of the column to be applied the filter</br>
+**name_operator** = Operator to be applied to the filter ``` equal, not_equal, greater_than_or_equal_to, less_than_or_equal_to, like  ```</br>
+**value** = Value for the filter</br>
+
+## Ordering
+
+```
+{{url}}/api/v1/car?order[name_column]=order
+{{url}}/api/v1/car?order[name]=asc
+```
+
+**name_column** = Name of the column to be applied the filter</br>
+**order** = asc or desc
+
+### Pagination
+O padrão é 10 por página
+
+```
+{{url}}/api/v1/car?paginate=value
+
+{{url}}/api/v1/car?paginate=false
+{{url}}/api/v1/car?paginate=20
+
+```
+
+**value** = Can receive ``` false ``` to disable a page or a number to change an amount per page
+
