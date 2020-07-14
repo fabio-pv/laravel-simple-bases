@@ -7,13 +7,13 @@
 
 ## summary   
 
-:lock: &nbsp; [Authentication using JWT](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#configuration-authentication-with-jwt)</br>
-:satellite: &nbsp; [Creating an endpoint](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#creating-an-endpoint)</br>
-:wrench: &nbsp; [Utilities on request](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#utilities-on-request)</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:mag_right: &nbsp; [Filters](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#filters)</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:arrow_up_down: &nbsp; [Ordering](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#ordering)</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: &nbsp; [Pagination](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#pagination)</br>
-:floppy_disk: &nbsp; [Intercept uuid for id](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#Intercept-uuid-for-id)</br>
+:lock: &nbsp; [Authentication using JWT](#configuration-authentication-with-jwt)</br>
+:satellite: &nbsp; [Creating an endpoint](#creating-an-endpoint)</br>
+:wrench: &nbsp; [Utilities on request](#utilities-on-request)</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:mag_right: &nbsp; [Filters](#filters)</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:arrow_up_down: &nbsp; [Ordering](#ordering)</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: &nbsp; [Pagination](#pagination)</br>
+:floppy_disk: &nbsp; [Intercept uuid for id](#Intercept-uuid-for-id)</br>
 
 ## About
 This package creates an initial base and utilities for your Laravel projects with a focus on REST api.</br> 
@@ -36,7 +36,7 @@ Containing the following resources:
 ## Installation
 `composer require fabio/laravel-simple-bases`
 
-## Configuration authentication with JWT
+## Configuration authentication with JWT [:arrow_up:]()
 This package is dependent on the package [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth), but don't worry, it has already been installed together. It will only take a few implementations for you to have working token authentication.
 
 ### Step 1
