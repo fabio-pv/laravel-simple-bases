@@ -5,9 +5,12 @@
         <img src="https://img.shields.io/github/v/release/fabio-pv/laravel-simple-bases">
 </p>
 
-## summary
-[authentication using JWT](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#configuration-authentication-with-jwt)
+## summary   
+
+[Authentication using JWT](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#configuration-authentication-with-jwt)</br>
 [Creating an endpoint](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#creating-an-endpoint)
+[Utilities on request](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#utilities-on-request)
+
 
 ## About
 This package creates an initial base and utilities for your Laravel projects with a focus on REST api.</br> 
