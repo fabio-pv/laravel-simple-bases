@@ -10,7 +10,9 @@
 :lock: &nbsp; [Authentication using JWT](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#configuration-authentication-with-jwt)</br>
 :satellite: &nbsp; [Creating an endpoint](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#creating-an-endpoint)</br>
 :wrench: &nbsp; [Utilities on request](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#utilities-on-request)</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:mag_right: [Utilities on request](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#filters)</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:mag_right: [Filters](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#filters)</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:arrow_up_down: [Ordering](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#ordering)</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: [Pagination](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#pagination)</br>
 :floppy_disk: &nbsp; [Intercept uuid for id](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#Intercept-uuid-for-id)</br>
 
 ## About
