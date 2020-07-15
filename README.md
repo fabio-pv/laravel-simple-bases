@@ -243,7 +243,7 @@ In the current version the filter only works for the model's main table.</br>
 **order** = asc or desc
 
 ### Pagination [:arrow_up:](#summary)
-O padrão é 10 por página
+Default is 10 per page
 
 ```
 {{url}}/api/v1/car?paginate=value
