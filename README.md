@@ -8,7 +8,7 @@
 ## summary   
 
 :lock: &nbsp; [Configuration authentication with JWT](#configuration-authentication-with-jwt-arrow_up)</br>
-:satellite: &nbsp; [Creating an endpoint](#creating-an-endpoint)</br>
+:satellite: &nbsp; [Creating an endpoint](#creating-an-endpoint-arrow_up)</br>
 :wrench: &nbsp; [Utilities on request](#utilities-on-request)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:mag_right: &nbsp; [Filters](#filters)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:arrow_up_down: &nbsp; [Ordering](#ordering)</br>
@@ -111,7 +111,7 @@ Change the path for the User model. </br>
 php artisan config:cache
 ```
 
-## Creating an endpoint
+## Creating an endpoint [:arrow_up:](#summary)
 
 ### Step 1
 Create a table for your new endpoint
