@@ -232,7 +232,7 @@ In the current version the filter only works for the model's main table.</br>
 **name_operator** = Operator to be applied to the filter ``` equal, not_equal, greater_than_or_equal_to, less_than_or_equal_to, like  ```</br>
 **value** = Value for the filter</br>
 
-## Ordering [:arrow_up:](#summary)
+### Ordering [:arrow_up:](#summary)
 
 ```
 {{url}}/api/v1/car?order[name_column]=order
