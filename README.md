@@ -7,13 +7,13 @@
 
 ## summary   
 
-:lock: &nbsp; [Authentication using JWT](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#configuration-authentication-with-jwt)</br>
-:satellite: &nbsp; [Creating an endpoint](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#creating-an-endpoint)</br>
-:wrench: &nbsp; [Utilities on request](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#utilities-on-request)</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:mag_right: &nbsp; [Filters](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#filters)</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:arrow_up_down: &nbsp; [Ordering](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#ordering)</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: &nbsp; [Pagination](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#pagination)</br>
-:floppy_disk: &nbsp; [Intercept uuid for id](https://github.com/fabio-pv/laravel-simple-bases/tree/new-readme#Intercept-uuid-for-id)</br>
+:lock: &nbsp; [Configuration authentication with JWT](#configuration-authentication-with-jwt-arrow_up)</br>
+:satellite: &nbsp; [Creating an endpoint](#creating-an-endpoint-arrow_up)</br>
+:wrench: &nbsp; [Utilities on request](#utilities-on-request-arrow_up)</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:mag_right: &nbsp; [Filters](#filters-arrow_up)</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:arrow_up_down: &nbsp; [Ordering](#ordering-arrow_up)</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: &nbsp; [Pagination](#pagination-arrow_up)</br>
+:floppy_disk: &nbsp; [Intercept uuid for id](#Intercept-uuid-for-id-arrow_up)</br>
 
 ## About
 This package creates an initial base and utilities for your Laravel projects with a focus on REST api.</br> 
@@ -36,7 +36,7 @@ Containing the following resources:
 ## Installation
 `composer require fabio/laravel-simple-bases`
 
-## Configuration authentication with JWT
+## Configuration authentication with JWT [:arrow_up:](#summary)
 This package is dependent on the package [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth), but don't worry, it has already been installed together. It will only take a few implementations for you to have working token authentication.
 
 ### Step 1
@@ -111,7 +111,7 @@ Change the path for the User model. </br>
 php artisan config:cache
 ```
 
-## Creating an endpoint
+## Creating an endpoint [:arrow_up:](#summary)
 
 ### Step 1
 Create a table for your new endpoint
@@ -120,8 +120,7 @@ php artisan make:migration create_cars_table
 ```
 
 ### Step 2
-The **fabio-pv:generate-endpoint-class** command will automatically create all necessary dependencies for the endpoint.</br>
-It will only be necessary to provide a name for the class and the name of the table that the model will reference.</br>
+The **fabio-pv:generate-endpoint-class** command will automatically create all necessary dependencies for the endpoint.It will only be necessary to provide a name for the class and the name of the table that the model will reference.</br>
 ```
  php artisan fabio-pv:generate-endpoint-class Car --table-name=cars
 ```
@@ -216,12 +215,12 @@ Test, if everything goes well you will have an endpoint working with the functio
 }
 ```
 
-## Utilities on request
+## Utilities on request [:arrow_up:](#summary)
 All endpoints that extend ```BaseController``` have filters ready to be used.</br>
 Note:</br>
 In the current version the filter only works for the model's main table.</br>
 
-### Filters
+### Filters [:arrow_up:](#summary)
 
 ```
 {{url}}/api/v1/car?filters[index_filter][name_column@name_operator]=value
@@ -233,7 +232,7 @@ In the current version the filter only works for the model's main table.</br>
 **name_operator** = Operator to be applied to the filter ``` equal, not_equal, greater_than_or_equal_to, less_than_or_equal_to, like  ```</br>
 **value** = Value for the filter</br>
 
-## Ordering
+### Ordering [:arrow_up:](#summary)
 
 ```
 {{url}}/api/v1/car?order[name_column]=order
@@ -243,7 +242,7 @@ In the current version the filter only works for the model's main table.</br>
 **name_column** = Name of the column to be applied the filter</br>
 **order** = asc or desc
 
-### Pagination
+### Pagination [:arrow_up:](#summary)
 O padrão é 10 por página
 
 ```
@@ -256,7 +255,7 @@ O padrão é 10 por página
 
 **value** = Can receive ``` false ``` to disable a page or a number to change an amount per page
 
-## Intercept uuid for id
+## Intercept uuid for id [:arrow_up:](#summary)
 On request where it is necessary to pass the relationship of another table is common to do by uuid but internally we need the id, to facilitate this 'transformation' this package has a config file where this transformation can be configured so that it happens automatically. Continue reading to learn more
 
 ### MER for this example
@@ -294,7 +293,7 @@ How to configure ?</br>
 
 Your ``` config/from_to_data.php ``` file should look like this</br>
 
-```
+```php
 return [
     \App\Models\v1\User::class => [
 
@@ -310,7 +309,7 @@ return [
 ### Step 3
 Test, if everything went well using the method post or patch and passing the relationship you should have the relationship in your database automatically
 
-## Intercept base64 to file
+## Intercept base64 to file [:arrow_up:](#summary)
 
 
 
