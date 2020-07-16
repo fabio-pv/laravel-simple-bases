@@ -423,7 +423,7 @@ This package has a base class to extend in ```app/Exceptions/Handler.php```. Thi
 
 **With ```BaseHandlerException```**</br>
 
-**APP_DEBUG=true**
+```APP_DEBUG=true```
 ```json
 {
     "error": {
@@ -434,7 +434,7 @@ This package has a base class to extend in ```app/Exceptions/Handler.php```. Thi
 }
 ```
 
-**APP_DEBUG=false**
+```APP_DEBUG=false```
 ```json
 {
     "error": {
