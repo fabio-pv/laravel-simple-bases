@@ -15,6 +15,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: &nbsp; [Pagination](#pagination-arrow_up)</br>
 :floppy_disk: &nbsp; [Intercept uuid for id](#Intercept-uuid-for-id-arrow_up)</br>
 :paperclip: &nbsp; [Intercept base64 to file](#Intercept-base64-to-file-arrow_up)</br>
+:red_circle: &nbsp; [Exception](#exception-file-arrow_up)</br>
 :triangular_ruler: &nbsp; [Helpers](#helpers-arrow_up)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: &nbsp; [fractal_transformer](#fractal_transformer-arrow_up)</br>
 
@@ -412,7 +413,7 @@ public function transform(Car $car)
         }
 ```
 
-## Exception
+## Exception [:arrow_up:](#summary)
 This package has a base class to extend in ```app/Exceptions/Handler.php```. This class will make the return of errors more pleasant for those who use the api
 
 **Original**</br>
