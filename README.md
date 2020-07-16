@@ -14,7 +14,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:arrow_up_down: &nbsp; [Ordering](#ordering-arrow_up)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: &nbsp; [Pagination](#pagination-arrow_up)</br>
 :floppy_disk: &nbsp; [Intercept uuid for id](#Intercept-uuid-for-id-arrow_up)</br>
-:floppy_disk: &nbsp; [Helper](#Intercept-uuid-for-id-arrow_up)</br>
+:paperclip: &nbsp; [Intercept base64 to file](#Intercept-base64-to-file-arrow_up)</br>
+:triangular_ruler: &nbsp; [Helper](#helpers-arrow_up)</br>
 
 ## About
 This package creates an initial base and utilities for your Laravel projects with a focus on REST api.</br> 
