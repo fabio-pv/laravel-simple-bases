@@ -311,5 +311,62 @@ Test, if everything went well using the method post or patch and passing the rel
 
 ## Intercept base64 to file [:arrow_up:](#summary)
 
+## Helpers
+
+### fractal_transformer
+Returns an array of an existing transformer.</br>
+Created mainly to be used inside another transformer, with it you can standardize your returns from the api</br>
+
+**Description**
+```php
+fractal_transformer(mixed $data, Transformer $transformer, mixed $defaultValue = [])
+```
+
+**Example**
+
+```php
+fractal_transformer($user->car, CarTransformer::class, null)
+```
+
+
+**Transformer implementation**
+
+```php
+public function transform(User $user)
+    {
+        return [
+            'uuid' => $user->uuid,
+            'name' => $user->name,
+            'car' => fractal_transformer(
+                $user->car,
+                CarTransformer::class,
+                null
+            ),
+        ];
+    }
+```
+
+**Example response**
+```json
+{
+    "data": [
+        {
+            "uuid": "64b774c0-c153-11ea-a4e9-01b907f3026a",
+            "name": "default",
+            "car": null
+        },
+        {
+            "uuid": "9c3c8960-c763-11ea-8a64-0b7b48fb6453",
+            "name": "new user 2",
+            "car": {
+                "uuid": "d96598d0-c527-11ea-b192-517bb6c42efa",
+                "name": "Mustang boss 302 68",
+                "license_plate": "ter-1234",
+                "motor_power": 290
+            }
+        }
+    ]
+}
+```
 
 
