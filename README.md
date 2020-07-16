@@ -15,7 +15,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: &nbsp; [Pagination](#pagination-arrow_up)</br>
 :floppy_disk: &nbsp; [Intercept uuid for id](#Intercept-uuid-for-id-arrow_up)</br>
 :paperclip: &nbsp; [Intercept base64 to file](#Intercept-base64-to-file-arrow_up)</br>
-:triangular_ruler: &nbsp; [Helper](#helpers-arrow_up)</br>
+:triangular_ruler: &nbsp; [Helpers](#helpers-arrow_up)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: &nbsp; [fractal_transformer](#fractal_transformer-arrow_up)</br>
 
 ## About
@@ -412,6 +412,39 @@ public function transform(Car $car)
         }
 ```
 
+## Exception
+This package has a base class to extend in ```app/Exceptions/Handler.php```. This class will make the return of errors more pleasant for those who use the api
+
+**Original**</br>
+
+![Captura de tela de 2020-07-16 11-36-29](https://user-images.githubusercontent.com/56044466/87684453-a6efbc00-c758-11ea-9c85-c52639dabb9e.png)
+
+</br>
+
+**With ```BaseHandlerException```**</br>
+
+**APP_DEBUG=true**
+```json
+{
+    "error": {
+        "message": "Resource not found",
+        "file": "/var/www/laravel-simple-bases-test/vendor/fabio/laravel-simple-bases/src/Services/BaseService.php",
+        "line": 59
+    }
+}
+```
+
+**APP_DEBUG=false**
+```json
+{
+    "error": {
+        "message": "Resource not found",        
+    }
+}
+```
+
+**Usage**</br>
+Just replace the ```ExceptionHandler``` class in ```app/Exceptions/Handler.php``` with ```BaseHandlerException```
 
 ## Helpers [:arrow_up:](#summary)
 
