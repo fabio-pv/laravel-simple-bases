@@ -5,7 +5,7 @@
         <img src="https://img.shields.io/github/v/release/fabio-pv/laravel-simple-bases">
 </p>
 
-## summary   
+## Summary   
 
 :lock: &nbsp; [Configuration authentication with JWT](#configuration-authentication-with-jwt-arrow_up)</br>
 :satellite: &nbsp; [Creating an endpoint](#creating-an-endpoint-arrow_up)</br>
