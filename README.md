@@ -14,6 +14,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:arrow_up_down: &nbsp; [Ordering](#ordering-arrow_up)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: &nbsp; [Pagination](#pagination-arrow_up)</br>
 :floppy_disk: &nbsp; [Intercept uuid for id](#Intercept-uuid-for-id-arrow_up)</br>
+:paperclip: &nbsp; [Intercept base64 to file](#Intercept-base64-to-file-arrow_up)</br>
+:red_circle: &nbsp; [Exception](#exception-arrow_up)</br>
+:triangular_ruler: &nbsp; [Helpers](#helpers-arrow_up)</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: &nbsp; [fractal_transformer](#fractal_transformer-arrow_up)</br>
 
 ## About
 This package creates an initial base and utilities for your Laravel projects with a focus on REST api.</br> 
@@ -243,7 +247,7 @@ In the current version the filter only works for the model's main table.</br>
 **order** = asc or desc
 
 ### Pagination [:arrow_up:](#summary)
-O padrão é 10 por página
+Default is 10 per page
 
 ```
 {{url}}/api/v1/car?paginate=value
@@ -310,6 +314,196 @@ return [
 Test, if everything went well using the method post or patch and passing the relationship you should have the relationship in your database automatically
 
 ## Intercept base64 to file [:arrow_up:](#summary)
+This package provides an easy way to implement file upload via base64 on any model you want.</br>
+Note: Files are saved using Laravel [Storage](https://laravel.com/docs/7.x/filesystem)</br>
+
+### Step 1
+Run the command below to publish the configuration file
+```
+php artisan fabio-pv:model-with-file-config
+```
+
+### Step 2
+Configure the file in ```config/model_with_file.php```
+```php
+return [
+    'model::class' => [
+        'fantasy_property' => 'photo',
+        'save_location' => '/photos/property_item',
+        'extension' => '.png'
+    ],
+];
+```
+
+**model::class** = Model that will receive file</br>
+**fantasy_property** = Property name with base64 in the request
+**save_location** = Directory where the image will be saved ()
+**extension** = File extension
+
+**Example**
+
+```php
+return [
+
+    \App\Models\v1\Car::class => [
+        'fantasy_property' => 'photo',
+        'save_location' => '/photos/car',
+        'extension' => '.png'
+    ],
+
+];
+```
+
+### Step 3 Optional
+If your config files are cached don't forget to run:
+```
+php artisan config:cache
+```
+
+### Step 4
+Test.</br>
+**Example Request**
+```json
+{
+    "name": "Honda Civic",
+    "license_plate": "ter-1223",
+    "motor_power": 140,
+    "photo": "your_base64"
+}
+```
+Note: the property you defined can receive multiple uploads for that, just pass an array
+
+### Step 5 Optional
+If you want to show the files in the reply just use the model ```files``` function</br>
+**Implementation**</br>
+In your transformer add a name for the property and use the ```fractal_transformer``` helper</br>
+Note: The files function is present in all models that extend ```ModelAuthenticatableBase``` or ```ModelBase```</br>
+```php
+public function transform(Car $car)
+    {
+        return [
+            'uuid' => $car->uuid,
+            'name' => $car->name,
+            'license_plate' => $car->license_plate,
+            'motor_power' => $car->motor_power,
+            'files' => fractal_transformer(
+                $car->files,
+                FileTransformer::class,
+                null
+            )
+        ];
+    }
+```
+
+**Example response**
+```json
+{
+            "uuid": "ff8e9ad0-c768-11ea-8a2a-e3c9240324d2",
+            "name": "Camaro ss 68",
+            "license_plate": "ter-4321",
+            "motor_power": 295,
+            "files": [
+                {
+                    "uuid": "ff90fb00-c768-11ea-926f-29877bf386e1",
+                    "file": "ff8f2170-c768-11ea-84b6-a1fa0486978b",
+                    "extension": ".png",
+                    "url": "http://laravel-simple-bases-test/v1/file/photos/car/ff8f2170-c768-11ea-84b6-a1fa0486978b.png"
+                }
+            ]
+        }
+```
+
+## Exception [:arrow_up:](#summary)
+This package has a base class to extend in ```app/Exceptions/Handler.php```. This class will make the return of errors more pleasant for those who use the api
+
+**Original**</br>
+
+![Captura de tela de 2020-07-16 11-36-29](https://user-images.githubusercontent.com/56044466/87684453-a6efbc00-c758-11ea-9c85-c52639dabb9e.png)
+
+</br>
+
+**With ```BaseHandlerException```**</br>
+
+```APP_DEBUG=true```
+```json
+{
+    "error": {
+        "message": "Resource not found",
+        "file": "/var/www/laravel-simple-bases-test/vendor/fabio/laravel-simple-bases/src/Services/BaseService.php",
+        "line": 59
+    }
+}
+```
+
+```APP_DEBUG=false```
+```json
+{
+    "error": {
+        "message": "Resource not found",        
+    }
+}
+```
+
+**Usage**</br>
+Just replace the ```ExceptionHandler``` class in ```app/Exceptions/Handler.php``` with ```BaseHandlerException```
+
+## Helpers [:arrow_up:](#summary)
+
+### fractal_transformer [:arrow_up:](#summary)
+Returns an array of an existing transformer.</br>
+Created mainly to be used inside another transformer, with it you can standardize your returns from the api</br>
+
+**Description**
+```php
+fractal_transformer(mixed $data, Transformer $transformer, mixed $defaultValue = [])
+```
+
+**Example**
+
+```php
+fractal_transformer($user->car, CarTransformer::class, null)
+```
+
+**Transformer implementation**
+
+```php
+public function transform(User $user)
+    {
+        return [
+            'uuid' => $user->uuid,
+            'name' => $user->name,
+            'car' => fractal_transformer(
+                $user->car,
+                CarTransformer::class,
+                null
+            ),
+        ];
+    }
+```
+
+**Example response**
+```json
+{
+    "data": [
+        {
+            "uuid": "64b774c0-c153-11ea-a4e9-01b907f3026a",
+            "name": "default",
+            "car": null
+        },
+        {
+            "uuid": "9c3c8960-c763-11ea-8a64-0b7b48fb6453",
+            "name": "new user 2",
+            "car": {
+                "uuid": "d96598d0-c527-11ea-b192-517bb6c42efa",
+                "name": "Mustang boss 302 68",
+                "license_plate": "ter-1234",
+                "motor_power": 290
+            }
+        }
+    ]
+}
+```
+
 
 
 
