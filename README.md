@@ -50,24 +50,30 @@ php artisan make:controller v1/AuthController
 ```
 
 ### Step 2
+Extend your controller to BaseAuth
+```php
+class AuthController extends BaseAuth
+```
+
+### Step 3
 In your file routes `routes/api.php`, create a login route. Ex.:
 ```php
 Route::post('v1/login', 'v1\AuthController@login');
 ```
 
-### Step 3
+### Step 4
 php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
 ```
 php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
 ```
 
-### Step 4
+### Step 5
 Generate secret key
 ```
 php artisan jwt:secret
 ```
 
-### Step 5
+### Step 6
 In config/auth.php make the changes
 
 ```
@@ -109,7 +115,7 @@ Change the path for the User model. </br>
     ],
 ```    
 
-### Step 6
+### Step 7
 **Optional**, if using config with cache, execute:
 ```
 php artisan config:cache
