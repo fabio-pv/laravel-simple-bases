@@ -36,6 +36,9 @@ trait HTTPQuery
             $this->makeFilterForJoin($filter);
         }
 
+        $this->retrive = $this->retrive
+            ->select($this->model->getTable() . '.*');
+
         return $this->retrive;
     }
 
@@ -53,6 +56,7 @@ trait HTTPQuery
             return;
         }
 
+        $key = $this->model->getTable() . '.' . $key;
         if ($operator === 'like') {
             $this->whereLike($key, $operator, $value);
             return;
@@ -62,7 +66,7 @@ trait HTTPQuery
 
     }
 
-    private function makeFilterForJoin($filter)
+    private function makeFilterForJoin($filter): void
     {
         $key = $filter['key'];
         $operator = $filter['operator'];
@@ -74,7 +78,6 @@ trait HTTPQuery
         }
 
         $this->whereCommon($key, $operator, $value);
-
     }
 
     private function whereCommon($key, $operator, $value): void
@@ -92,11 +95,12 @@ trait HTTPQuery
         $explode = explode('.', $key);
         $column = $explode[(count($explode) - 1)];
         unset($explode[(count($explode) - 1)]);
-        dd($explode);
+
+        $lastRelatedTable = null;
         foreach ($explode as $table) {
 
             $relatedTable = $this->makeNameRelatedTable($table);
-            $foreign = $this->makeNameForeignKeyTable($table);
+            $foreign = $this->makeNameForeignKeyTable($table, $lastRelatedTable);
             $relatedColumn = $this->makeNameReleatedColumnCompareTable($relatedTable);
 
             $this->retrive = $this->retrive
@@ -107,13 +111,16 @@ trait HTTPQuery
                     $relatedColumn
                 );
 
-            $this->joinFilters[] = [
-                'key' => $this->makeNameColumnForFilter($relatedTable, $column),
-                'operator' => $operator,
-                'value' => $value
-            ];
+            $lastRelatedTable = $relatedTable;
 
         }
+
+        $this->joinFilters[] = [
+            'key' => $this->makeNameColumnForFilter($relatedTable, $column),
+            'operator' => $operator,
+            'value' => $value
+        ];
+
     }
 
     private function makeNameColumnForFilter(string $related, string $column): string
@@ -126,9 +133,15 @@ trait HTTPQuery
         return $related . '.id';
     }
 
-    private function makeNameForeignKeyTable(string $name): string
+    private function makeNameForeignKeyTable(string $name, string $relatedTable = null): string
     {
-        $foreign = $this->model->getTable() . '.' . $name . '_id';
+
+        $nameTable = $this->model->getTable();
+        if (!empty($relatedTable)) {
+            $nameTable = $relatedTable;
+        }
+
+        $foreign = $nameTable . '.' . $name . '_id';
         return $foreign;
     }
 
