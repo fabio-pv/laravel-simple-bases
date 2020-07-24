@@ -17,6 +17,8 @@ const PAGINATE_DEFAULT = 10;
 trait HTTPQuery
 {
 
+    private $joinFilters = [];
+
     public function filter()
     {
 
@@ -29,6 +31,11 @@ trait HTTPQuery
 
             $this->makeFilter($filter);
         }
+
+        foreach ($this->joinFilters as $filter) {
+            $this->makeFilterForJoin($filter);
+        }
+
         return $this->retrive;
     }
 
@@ -41,13 +48,97 @@ trait HTTPQuery
         $operator = OPERATOR[$keyAndOperator[1]];
         $value = array_values($filter)[0];
 
-        if($operator === 'like'){
-            $this->retrive = $this->retrive->where($key, $operator, "%$value%");
+        if (strpos($key, '.') !== false) {
+            $this->whereJoin($key, $operator, $value);
             return;
         }
 
-        $this->retrive = $this->retrive->where($key, $operator, $value);
+        if ($operator === 'like') {
+            $this->whereLike($key, $operator, $value);
+            return;
+        }
 
+        $this->whereCommon($key, $operator, $value);
+
+    }
+
+    private function makeFilterForJoin($filter)
+    {
+        $key = $filter['key'];
+        $operator = $filter['operator'];
+        $value = $filter['value'];
+
+        if ($operator === 'like') {
+            $this->whereLike($key, $operator, $value);
+            return;
+        }
+
+        $this->whereCommon($key, $operator, $value);
+
+    }
+
+    private function whereCommon($key, $operator, $value): void
+    {
+        $this->retrive = $this->retrive->where($key, $operator, $value);
+    }
+
+    private function whereLike($key, $operator, $value): void
+    {
+        $this->retrive = $this->retrive->where($key, $operator, "%$value%");
+    }
+
+    private function whereJoin($key, $operator, $value): void
+    {
+        $explode = explode('.', $key);
+        $column = $explode[(count($explode) - 1)];
+        unset($explode[(count($explode) - 1)]);
+        dd($explode);
+        foreach ($explode as $table) {
+
+            $relatedTable = $this->makeNameRelatedTable($table);
+            $foreign = $this->makeNameForeignKeyTable($table);
+            $relatedColumn = $this->makeNameReleatedColumnCompareTable($relatedTable);
+
+            $this->retrive = $this->retrive
+                ->join(
+                    $relatedTable,
+                    $foreign,
+                    $operator,
+                    $relatedColumn
+                );
+
+            $this->joinFilters[] = [
+                'key' => $this->makeNameColumnForFilter($relatedTable, $column),
+                'operator' => $operator,
+                'value' => $value
+            ];
+
+        }
+    }
+
+    private function makeNameColumnForFilter(string $related, string $column): string
+    {
+        return $related . '.' . $column;
+    }
+
+    private function makeNameReleatedColumnCompareTable(string $related): string
+    {
+        return $related . '.id';
+    }
+
+    private function makeNameForeignKeyTable(string $name): string
+    {
+        $foreign = $this->model->getTable() . '.' . $name . '_id';
+        return $foreign;
+    }
+
+    private function makeNameRelatedTable(string $nameRaw): string
+    {
+        if (substr($nameRaw, -1) === 's') {
+            return $nameRaw;
+        }
+
+        return $nameRaw . 's';
     }
 
     public function order()
