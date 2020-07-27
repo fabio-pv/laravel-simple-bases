@@ -1,7 +1,7 @@
 {
   "name": "fabio-pv/laravel-simple-bases",
   "description": "A set of base classes to help create projects with Laravel",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "license": "MIT",
   "require": {
     "php": ">=7.2.0",
