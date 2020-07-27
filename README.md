@@ -476,6 +476,25 @@ public function transform(Car $car)
         }
 ```
 
+### Update file
+To update the file just pass a new parameter with the same name as the property you created with a '_uuid' at the end and in the original property pass the new file.
+Example:
+```json
+{
+    "photo": "you_base64",
+    "photo_uuid": "uuid of the file that will be updated"
+}
+```
+### Delete file
+To delete the file, just pass a new parameter with the same name as the property you created with a '_uuid' at the end and in the original property pass the value null.
+Example:
+```json
+{
+    "photo": "null",
+    "photo_uuid": "uuid of the file to be deleted"
+}
+```
+
 ## Exception [:arrow_up:](#summary)
 This package has a base class to extend in ```app/Exceptions/Handler.php```. This class will make the return of errors more pleasant for those who use the api
 
