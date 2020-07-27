@@ -3,7 +3,10 @@
 
 namespace LaravelSimpleBases\Http\Controllers;
 
-const DELIMITER = '@';
+use Illuminate\Database\Eloquent\Builder;
+
+const COLUMN_VALUE_DELIMITER = '@';
+const JOIN_DELIMITER = '.';
 const OPERATOR = [
     'equal' => '=',
     'not_equal' => '!=',
@@ -35,18 +38,69 @@ trait HTTPQuery
     private function makeFilter($filter)
     {
 
-        $keyAndOperator = explode(DELIMITER, key($filter));;
+        $keyAndOperator = explode(COLUMN_VALUE_DELIMITER, key($filter));;
 
         $key = $keyAndOperator[0];
         $operator = OPERATOR[$keyAndOperator[1]];
         $value = array_values($filter)[0];
 
-        if($operator === 'like'){
-            $this->retrive = $this->retrive->where($key, $operator, "%$value%");
+        if (strpos($key, JOIN_DELIMITER)) {
+            $this->whereJoin($key, $operator, $value);
             return;
         }
 
-        $this->retrive = $this->retrive->where($key, $operator, $value);
+        $this->retrive = $this->doWhereAuto($this->retrive, $key, $operator, $value);
+
+    }
+
+    private function doWhereAuto($query, string $column, string $operator, string $value)
+    {
+
+        if ($operator === 'like') {
+            $value = "%$value%";
+        }
+
+        return $query->where($column, $operator, $value);
+
+    }
+
+    private function whereJoin(string $key, string $operador, $value): void
+    {
+
+        $relation = explode('.', $key);
+        $column = $relation[(count($relation) - 1)];
+        array_pop($relation);
+        $relation = $this->makeRelationForJoin($relation);
+
+        $this->retrive = $this->retrive
+            ->whereHas($relation,
+                function (Builder $query)
+                use ($column, $operador, $value) {
+
+                    return $this->doWhereAuto($query, $column, $operador, $value);
+
+                });
+    }
+
+    private function makeRelationForJoin(array $relations): string
+    {
+        $relationString = '';
+        foreach ($relations as $relation) {
+            if (strpos($relation, '_') === false) {
+                $relationString .= $relation . '.';
+                continue;
+            }
+
+            $relation = str_replace('_', ' ', $relation);
+            $relation = ucwords($relation);
+            $relation = str_replace(' ', '', $relation);
+            $relation = lcfirst($relation);
+
+            $relationString .= $relation . '.';
+
+        }
+
+        return substr($relationString, 0, -1);
 
     }
 
