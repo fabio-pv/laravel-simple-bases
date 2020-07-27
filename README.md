@@ -242,6 +242,63 @@ In the current version the filter only works for the model's main table.</br>
 **name_operator** = Operator to be applied to the filter ``` equal, not_equal, greater_than_or_equal_to, less_than_or_equal_to, like  ```</br>
 **value** = Value for the filter</br>
 
+#### Filter on related tables
+As of version v0.3.0, the filter also works with the related tables.
+
+**Example:**
+
+* user endpoint response
+```json
+[
+{
+            "uuid": "64b774c0-c153-11ea-a4e9-01b907f3026a",
+            "name": "default",
+            "car": {
+                "uuid": "c1f87e50-c769-11ea-99ef-356032d7a36b",
+                "name": "Honda Civic",
+                "license_plate": "ter-1223",
+                "motor_power": 140,
+                "car_type": {
+                    "uuid": "527b20a0-cda3-11ea-8820-6d38fc501b58",
+                    "name": "Hatch"
+                }
+            }
+        },
+        ...
+]
+```
+
+Assuming that we only want **user** who have a **car** with **motor_power** equal to **'140'**. Our queryString will look like this:
+
+```
+{{url}}/api/v1/user?filters[0][car.motor_power@equal]=140
+```
+
+**Other example**
+
+Assuming we want all **user** who have **car** of **car_type** equal to **'Sporty'**
+```
+{{url}}/api/v1/user?filters[0][car.car_type.name@equal]=Sporty
+```
+
+**Note**
+The functioning of the filters depends on the following requirements:
+* The name of the properties in transformer must be the same as the database tables. (This is related to usability)
+* The relationships in the transformer must follow the same name as the models only separated by '_'. </br>
+Model
+```php
+public function carType()
+```
+
+Transformer
+```php
+'car_type' => fractal_transformer(
+                $car->carType,
+                CarTypeTransformer::class,
+                null
+            )
+```
+
 ### Ordering [:arrow_up:](#summary)
 
 ```
