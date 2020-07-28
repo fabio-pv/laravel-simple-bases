@@ -3,6 +3,7 @@
 
 <p align="center">
         <img src="https://img.shields.io/github/v/release/fabio-pv/laravel-simple-bases">
+        <img src="https://poser.pugx.org/fabio/laravel-simple-bases/license">
 </p>
 
 ## Summary   
