@@ -16,7 +16,7 @@ class GenerateEndpointClass extends Command
      *
      * @var string
      */
-    protected $signature = 'fabio-pv:generate-endpoint-class {name} {--table-name=}}';
+    protected $signature = 'fabio-pv:generate-endpoint-class {name} {--table-name=} {--api-version=}';
 
     /**
      * The console command description.
@@ -45,13 +45,13 @@ class GenerateEndpointClass extends Command
 
         $name = $this->argument('name');
         $tableName = $this->option('table-name');
+        $versionName = $this->option('api-version');
 
-
-        ControllerTemplate::instance()->make($name);
-        ServiceTemplate::instance()->make($name);
-        ValidationTemplate::instance()->make($name);
+        ControllerTemplate::instance()->make($name, $versionName);
+        ServiceTemplate::instance()->make($name, $versionName);
+        ValidationTemplate::instance()->make($name, $versionName);
         ModelTemplate::make($name, $tableName);
-        TransformerTemplate::make($name);
+        TransformerTemplate::make($name, $versionName);
 
         return 0;
     }

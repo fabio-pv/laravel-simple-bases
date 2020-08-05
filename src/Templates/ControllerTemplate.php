@@ -8,12 +8,12 @@ class ControllerTemplate extends BaseTemplate
     protected $type = BaseTemplate::CONTROLLER_TYPE;
     protected $template = '<?php
 
-namespace App\Http\Controllers\v1;
+namespace App\Http\Controllers\__VERSION__;
 
-use App\Http\Validations\v1\__CLASS__Validation;
-use App\Models\v1\__CLASS__;
-use App\Services\v1\__CLASS__Service;
-use App\Transformers\v1\__CLASS__Transformer;
+use App\Http\Validations\__VERSION__\__CLASS__Validation;
+use App\Models\__VERSION__\__CLASS__;
+use App\Services\__VERSION__\__CLASS__Service;
+use App\Transformers\__VERSION__\__CLASS__Transformer;
 use LaravelSimpleBases\Http\Controllers\BaseController;
 
 class __CLASS__Controller extends BaseController
