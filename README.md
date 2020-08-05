@@ -135,7 +135,7 @@ The **fabio-pv:generate-endpoint-class** command will automatically create all n
 ```
  php artisan fabio-pv:generate-endpoint-class Car --table-name=cars
 ```
-This command will create 5 class in your project with versioning in the v1 directory.
+This command will create 5 classes in your versioned project in the v1 directory. If you need to change the versioning use the option `--api-version=`.
 * Model
 * Controller
 * Service
