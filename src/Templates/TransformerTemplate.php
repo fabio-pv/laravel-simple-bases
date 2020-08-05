@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\Artisan;
 class TransformerTemplate
 {
 
-    public static function make(string $name): void
+    public static function make(string $name, string $version = null): void
     {
-        Artisan::call('make:transformer v1/' . $name . 'Transformer');
+        if (empty($version)) {
+            $version = 'v1';
+        }
+
+        Artisan::call('make:transformer ' . $version . '/' . $name . 'Transformer');
     }
 
 }

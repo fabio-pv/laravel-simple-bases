@@ -11,7 +11,7 @@ class ServiceTemplate extends BaseTemplate
     protected $template = '<?php
 
 
-namespace App\Services\v1;
+namespace App\Services\__VERSION__;
 
 
 use LaravelSimpleBases\Services\BaseService;
