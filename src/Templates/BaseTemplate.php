@@ -52,7 +52,7 @@ abstract class BaseTemplate
         $dirFile = $dir . $fileName;
 
         if (!is_dir($dir)) {
-            mkdir($dir);
+            mkdir($dir, 0777, true);
         }
 
         file_put_contents($dirFile, $codeCreate, FILE_TEXT);
