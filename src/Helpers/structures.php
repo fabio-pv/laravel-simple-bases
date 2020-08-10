@@ -5,7 +5,7 @@ if (!function_exists('response_default')) {
     {
 
         return response()
-            ->json($data, 200);
+            ->json($data, $statusCode);
 
     }
 }
