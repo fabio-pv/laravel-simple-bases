@@ -7,7 +7,7 @@
 </p>
 
 ## Summary   
-
+:computer: &nbsp; [Installation](#installation-arrow_up)</br>
 :lock: &nbsp; [Configuration authentication with JWT](#configuration-authentication-with-jwt-arrow_up)</br>
 :satellite: &nbsp; [Creating an endpoint](#creating-an-endpoint-arrow_up)</br>
 :wrench: &nbsp; [Utilities on request](#utilities-on-request-arrow_up)</br>
