@@ -1,10 +1,25 @@
 {
+  "version": "0.4.3",
   "name": "fabio-pv/laravel-simple-bases",
   "description": "A set of base classes to help create projects with Laravel",
-  "version": "0.4.3",
+  "homepage": "https://github.com/fabio-pv/laravel-simple-bases",
+  "keywords": [
+    "fabio-pv",
+    "Rest",
+    "api",
+    "Filters"
+  ],
+  "authors": [
+    {
+      "name": "Fábio Pacheco",
+      "email": "fabiopv1994@gmail.com",
+      "homepage": "https://github.com/fabio-pv",
+      "role": "Developer"
+    }
+  ],
   "license": "MIT",
   "require": {
-    "php": ">=7.2.0",
+    "php": "^7.2.0",
     "webpatser/laravel-uuid": "^3.0",
     "spatie/laravel-fractal": "^5.7.0",
     "spatie/laravel-activitylog": "^3.14",
