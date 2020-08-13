@@ -38,7 +38,7 @@ Containing the following resources:
 ## Sample repository
 [Sample](https://github.com/fabio-pv/laravel-simple-bases-exemple)
 
-## Installation
+## Installation [:arrow_up:](#summary)
 `composer require fabio/laravel-simple-bases`
 
 ## Configuration authentication with JWT [:arrow_up:](#summary)
