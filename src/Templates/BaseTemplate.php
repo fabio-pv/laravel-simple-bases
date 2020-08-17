@@ -7,12 +7,14 @@ abstract class BaseTemplate
     private const types = [
         'Controller' => '/app/Http/Controllers/',
         'Service' => '/app/Services/',
-        'Validation' => '/app/Http/Validations/'
+        'Validation' => '/app/Http/Validations/',
+        'Permission' => '/app/Http/Permissions/',
     ];
 
     protected const CONTROLLER_TYPE = 'Controller';
     protected const SERVICE_TYPE = 'Service';
     protected const VALIDATION_TYPE = 'Validation';
+    protected const PERMISSION_TYPE = 'Permission';
 
     private const CODE_MARKER_CLASS = '__CLASS__';
     private const CODE_MARKER_VARIABLE = '__VARIABLE__';
