@@ -6,7 +6,7 @@ namespace LaravelSimpleBases\Templates;
 
 class PermissionTemplate extends BaseTemplate
 {
-    
+
     protected $type = BaseTemplate::PERMISSION_TYPE;
     protected $template = '<?php
 
@@ -19,17 +19,21 @@ use LaravelSimpleBases\Http\Permissions\BasePermission;
 class __CLASS__Permission extends BasePermission
 {
 
-
-    protected $permissions = [
+     protected $permissions = [
+        \'index\' => [],
+        \'show\' => [],
+        \'store\' => [],
+        \'update\' => [],
+        \'destroy\' => [],
     ];
 
 }
 ';
-    
+
     public static function instance()
     {
         return new PermissionTemplate();
     }
-    
+
 
 }
