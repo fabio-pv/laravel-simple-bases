@@ -21,7 +21,7 @@ trait ComplexQueryService
                 continue;
             }
 
-            $this->getRealData($fromToData, $data);
+            $this->getRealData($fromToData, $data, $key);
             unset($datas[$key]);
         }
 
@@ -31,7 +31,7 @@ trait ComplexQueryService
 
     }
 
-    private function getRealData($fromToData, $data)
+    private function getRealData($fromToData, $data, $key)
     {
         if(empty($data)){
             return;
@@ -42,7 +42,9 @@ trait ComplexQueryService
         $model = new $fromToData['model'];
         $model = $model->findByUuid($data);
         if (empty($model)) {
-            throw new ModelNotFoundException();
+            throw new ModelNotFoundException(
+                'Resource not found to property: '. $key
+            );
         }
         $this->realProperties[$fromToData['property']] = $model->id;
 
