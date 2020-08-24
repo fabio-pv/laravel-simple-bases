@@ -16,6 +16,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: &nbsp; [Pagination](#pagination-arrow_up)</br>
 :floppy_disk: &nbsp; [Intercept uuid for id](#Intercept-uuid-for-id-arrow_up)</br>
 :paperclip: &nbsp; [Intercept base64 to file](#Intercept-base64-to-file-arrow_up)</br>
+:paperclip: &nbsp; [Permission](#Intercept-base64-to-file-arrow_up)</br>
 :red_circle: &nbsp; [Exception](#exception-arrow_up)</br>
 :triangular_ruler: &nbsp; [Helpers](#helpers-arrow_up)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: &nbsp; [fractal_transformer](#fractal_transformer-arrow_up)</br>
