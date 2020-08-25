@@ -596,7 +596,67 @@ public function userRole()
     }
 ```
 
+### Step 5
+Testar
+
+### Dica
+Caso seu controller tenha mais funções que as 4 padroes `index` `show` `store` `update` `destroy`, você pode definir manualmente da seguinte forma:
+```php
+protected $permissions = [
+        'index' => [],
+        'show' => [],
+        'store' => [],
+        'update' => [],
+        'destroy' => [],
+        'other_function_name' => [],
+        'other_function_name2' => [],
+    ];
+```
+
+Em seu controller adicione essa chamada no inicio da função:
+```php
+$this->hasPermissonSet();
+```
+
 **Alterar logica da permissão**
+Por padrão a class BasePermission tentarar pegar a role do user da seguinte forma:
+```php
+return $user->userRole->id;
+```
+
+Caso precise alterar a forma de buscar a role execute o comando abaixo:
+```
+php artisan fabio-pv:generate-permission-handle
+```
+
+O comando ira gerar a class 
+```php
+class HandlePermission implements HandlePermissionInterface
+{
+}
+```
+Implemente as funções `handle` e `message`
+
+**Handle** </br>
+Aqui você pode alterar a forma de buscar a role do usuário, só não esqueça de retorna role =)
+```php
+ public static function handle($user)
+    {
+        /**
+         * @var User $user
+         */
+        return $user->userRole->id;
+    }
+```
+
+**message**
+Aqui vocẽ pode definir a mensagem para exception de acesso negado
+```php
+ public static function message(): string
+    {
+        return 'Your users do not have access to this feature';
+    }
+```
 
 
 ## Exception [:arrow_up:](#summary)
