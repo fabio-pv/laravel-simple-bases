@@ -498,7 +498,106 @@ Example:
 ```
 
 ## Permission [:arrow_up:](#summary)
-...
+Esse pacote providencia classes para lidar com as permissões, basicamente ele contra se a role do usuario pode ou não acessar determinada rota.
+Obs.: Na versão atual ele não controla se o usuario está autenticado ou não, ainda será necessario implementar middleware https://laravel.com/docs/7.x/middleware
+
+**Configuração**
+
+### Step 1
+Execute o commando </br>
+`php artisan fabio-pv:generate-permission-class nome_da_class`
+
+### Step 2
+Configure o arquivo dando acesso as funções de acordo com a regra do seu sistema
+
+```php
+class CarPermission extends BasePermission
+{
+
+     protected $permissions = [
+        'index' => [],
+        'show' => [],
+        'store' => [],
+        'update' => [],
+        'destroy' => [],
+    ];
+
+}
+```
+
+Exemplo:
+
+```php
+class CarPermission extends BasePermission
+{
+
+     protected $permissions = [
+        'index' => [
+            UserRole::ADMIN,
+            UserRole::COMMON
+        ],
+        'show' => [
+            UserRole::ADMIN,
+            UserRole::COMMON
+        ],
+        'store' => [
+            UserRole::ADMIN,
+        ],
+        'update' => [
+            UserRole::ADMIN,
+        ],
+        'destroy' => [
+            UserRole::ADMIN,
+        ],
+    ];
+
+}
+```
+
+**Dica:**
+Para facilitar de deixar o codigo mais elegante defina as role como constante no model de role
+Exemplo: 
+```php
+class UserRole extends ModelBase
+{
+    const ADMIN = 1;
+    const COMMON = 2;
+
+```
+
+### Step 3
+Defina as dependencia no controller
+
+```php
+class CarController extends BaseController
+{
+    public function __construct(
+        Car $car,
+        CarTransformer $carTransformer,
+        CarValidation $carValidation,
+        CarPermission $carPermission
+    )
+    {
+        $this->model = $car;
+        $this->service = new CarService($this->model);
+        $this->transformer = $carTransformer;
+        $this->validation = $carValidation;
+        $this->permission = $carPermission;
+    }
+}
+```
+
+### Step 4
+Criar o relacionamento no model de user
+```php
+public function userRole()
+    {
+        return $this->belongsTo('App\Models\v1\UserRole');
+    }
+```
+
+**Alterar logica da permissão**
+
 
 ## Exception [:arrow_up:](#summary)
 This package has a base class to extend in ```app/Exceptions/Handler.php```. This class will make the return of errors more pleasant for those who use the api
