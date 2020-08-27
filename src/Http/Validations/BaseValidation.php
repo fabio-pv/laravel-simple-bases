@@ -7,9 +7,11 @@ namespace LaravelSimpleBases\Http\Validations;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use LaravelSimpleBases\Exceptions\ValidationFieldException;
+use LaravelSimpleBases\Utils\ValidationUtil;
 
 abstract class BaseValidation
 {
+    use ValidationUtil;
 
     const CREATE = 'store';
     const UPDATE = 'update';
