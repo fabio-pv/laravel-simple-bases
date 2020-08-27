@@ -46,6 +46,7 @@ abstract class BaseController extends Controller
     {
         try {
             $this->hasPermissonSet();
+            $this->validation->validate(\request(), __FUNCTION__);
             $this->retrive = $this->service->retriveAll();
             $this->filter();
             $this->order();
@@ -70,6 +71,7 @@ abstract class BaseController extends Controller
         try {
 
             $this->hasPermissonSet();
+            $this->validation->validate(\request(), __FUNCTION__);
             $this->retrive = $this->service->searchByUuid($uuid);
             $transformer = $this->transformer;
             if ($this->transformeForShowMethod !== null) {
