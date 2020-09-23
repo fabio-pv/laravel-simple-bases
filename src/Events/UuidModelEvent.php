@@ -22,7 +22,7 @@ class UuidModelEvent
      */
     public function __construct($model)
     {
-        if ($model->withUuid === true) {
+        if (!in_array('uuid', $model->getFillable())) {
             return;
         }
         $model->uuid = Uuid::generate()->string;
