@@ -22,8 +22,10 @@ class UuidModelEvent
      */
     public function __construct($model)
     {
+        if ($model->withUuid === true) {
+            return;
+        }
         $model->uuid = Uuid::generate()->string;
-        return $model;
     }
 
     /**
