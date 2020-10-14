@@ -498,17 +498,17 @@ Example:
 ```
 
 ## Permission [:arrow_up:](#summary)
-Esse pacote providencia classes para lidar com as permissões, basicamente ele contra se a role do usuario pode ou não acessar determinada rota.
-Obs.: Na versão atual ele não controla se o usuario está autenticado ou não, ainda será necessario implementar middleware https://laravel.com/docs/7.x/middleware
+This package provides classes to deal with permissions, basically it checks if the user's role can access a given route or not.
+Note: In the current version it does not control whether the user is authenticated or not, it will still be necessary to implement middleware https://laravel.com/docs/7.x/middleware
 
-**Configuração**
+**Configuration**
 
 ### Step 1
-Execute o commando </br>
+Run the command </br>
 `php artisan fabio-pv:generate-permission-class nome_da_class`
 
 ### Step 2
-Configure o arquivo dando acesso as funções de acordo com a regra do seu sistema
+Configure the file giving access to the functions according to your system's rule
 
 ```php
 class CarPermission extends BasePermission
@@ -525,7 +525,7 @@ class CarPermission extends BasePermission
 }
 ```
 
-Exemplo:
+Example:
 
 ```php
 class CarPermission extends BasePermission
@@ -554,9 +554,9 @@ class CarPermission extends BasePermission
 }
 ```
 
-**Dica:**
-Para facilitar de deixar o codigo mais elegante defina as role como constante no model de role
-Exemplo: 
+**Tip:**
+To make the code more elegant, define the role as constant in the role model
+Example:
 ```php
 class UserRole extends ModelBase
 {
@@ -566,7 +566,7 @@ class UserRole extends ModelBase
 ```
 
 ### Step 3
-Defina as dependencia no controller
+Define dependencies on the controller
 
 ```php
 class CarController extends BaseController
@@ -588,7 +588,7 @@ class CarController extends BaseController
 ```
 
 ### Step 4
-Criar o relacionamento no model de user
+Create the relationship in the user model
 ```php
 public function userRole()
     {
@@ -597,10 +597,10 @@ public function userRole()
 ```
 
 ### Step 5
-Testar
+test
 
 ### Dica
-Caso seu controller tenha mais funções que as 4 padroes `index` `show` `store` `update` `destroy`, você pode definir manualmente da seguinte forma:
+If your controller has more functions than the 4 `index` `show` `store` `update` `destroy` defaults, you can configure it manually as follows:
 ```php
 protected $permissions = [
         'index' => [],
@@ -613,32 +613,32 @@ protected $permissions = [
     ];
 ```
 
-Em seu controller adicione essa chamada no inicio da função:
+In your controller add this call at the beginning of the function:
 ```php
 $this->hasPermissonSet();
 ```
 
-**Alterar logica da permissão**
-Por padrão a class BasePermission tentarar pegar a role do user da seguinte forma:
+**Change permission logic**
+By default, the BasePermission class tries to take the user's role as follows:
 ```php
 return $user->userRole->id;
 ```
 
-Caso precise alterar a forma de buscar a role execute o comando abaixo:
+If you need to change the way to search for the role run the command below:
 ```
 php artisan fabio-pv:generate-permission-handle
 ```
 
-O comando ira gerar a class 
+The command will generate the class 
 ```php
 class HandlePermission implements HandlePermissionInterface
 {
 }
 ```
-Implemente as funções `handle` e `message`
+Implement the functions `handle` and `message`
 
 **Handle** </br>
-Aqui você pode alterar a forma de buscar a role do usuário, só não esqueça de retorna role =)
+Here you can change the way to search for the user's role, just don't forget to return role =)
 ```php
  public static function handle($user)
     {
@@ -650,7 +650,7 @@ Aqui você pode alterar a forma de buscar a role do usuário, só não esqueça 
 ```
 
 **message**
-Aqui vocẽ pode definir a mensagem para exception de acesso negado
+Here you can define the message for access denied exception
 ```php
  public static function message(): string
     {
