@@ -16,6 +16,9 @@ class TransformerTemplate
         }
 
         Artisan::call('make:transformer ' . $version . '/' . $name . 'Transformer');
+
+        echo 'Create Transformer: ' . $name . '.php';
+        echo PHP_EOL;
     }
 
 }
