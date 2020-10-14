@@ -16,5 +16,9 @@ class ModelTemplate
             ' --table-name=' .
             $tableName
         );
+
+        echo 'Create Model: ' . $name . '.php';
+        echo PHP_EOL;
+
     }
 }

@@ -5,6 +5,7 @@ namespace LaravelSimpleBases\Commands;
 use Illuminate\Console\Command;
 use LaravelSimpleBases\Templates\ControllerTemplate;
 use LaravelSimpleBases\Templates\ModelTemplate;
+use LaravelSimpleBases\Templates\RouteTemplate;
 use LaravelSimpleBases\Templates\ServiceTemplate;
 use LaravelSimpleBases\Templates\TransformerTemplate;
 use LaravelSimpleBases\Templates\ValidationTemplate;
@@ -53,11 +54,13 @@ class GenerateEndpointClass extends Command
             return;
         }
 
+
         ControllerTemplate::instance()->make($name, $versionName);
         ServiceTemplate::instance()->make($name, $versionName);
         ValidationTemplate::instance()->make($name, $versionName);
         ModelTemplate::make($name, $tableName);
         TransformerTemplate::make($name, $versionName);
+        RouteTemplate::make($name, $versionName);
 
         return 0;
     }
