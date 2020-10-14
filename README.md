@@ -16,6 +16,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: &nbsp; [Pagination](#pagination-arrow_up)</br>
 :floppy_disk: &nbsp; [Intercept uuid for id](#Intercept-uuid-for-id-arrow_up)</br>
 :paperclip: &nbsp; [Intercept base64 to file](#Intercept-base64-to-file-arrow_up)</br>
+:no_entry_sign: &nbsp; [Permission](#Permission-arrow_up)</br>
 :red_circle: &nbsp; [Exception](#exception-arrow_up)</br>
 :triangular_ruler: &nbsp; [Helpers](#helpers-arrow_up)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: &nbsp; [fractal_transformer](#fractal_transformer-arrow_up)</br>
@@ -495,6 +496,168 @@ Example:
     "photo_uuid": "uuid of the file to be deleted"
 }
 ```
+
+## Permission [:arrow_up:](#summary)
+This package provides classes to deal with permissions, basically it checks if the user's role can access a given route or not.
+Note: In the current version it does not control whether the user is authenticated or not, it will still be necessary to implement middleware https://laravel.com/docs/7.x/middleware
+
+**Configuration**
+
+### Step 1
+Run the command </br>
+`php artisan fabio-pv:generate-permission-class nome_da_class`
+
+### Step 2
+Configure the file giving access to the functions according to your system's rule
+
+```php
+class CarPermission extends BasePermission
+{
+
+     protected $permissions = [
+        'index' => [],
+        'show' => [],
+        'store' => [],
+        'update' => [],
+        'destroy' => [],
+    ];
+
+}
+```
+
+Example:
+
+```php
+class CarPermission extends BasePermission
+{
+
+     protected $permissions = [
+        'index' => [
+            UserRole::ADMIN,
+            UserRole::COMMON
+        ],
+        'show' => [
+            UserRole::ADMIN,
+            UserRole::COMMON
+        ],
+        'store' => [
+            UserRole::ADMIN,
+        ],
+        'update' => [
+            UserRole::ADMIN,
+        ],
+        'destroy' => [
+            UserRole::ADMIN,
+        ],
+    ];
+
+}
+```
+
+**Tip:**
+To make the code more elegant, define the role as constant in the role model
+Example:
+```php
+class UserRole extends ModelBase
+{
+    const ADMIN = 1;
+    const COMMON = 2;
+
+```
+
+### Step 3
+Define dependencies on the controller
+
+```php
+class CarController extends BaseController
+{
+    public function __construct(
+        Car $car,
+        CarTransformer $carTransformer,
+        CarValidation $carValidation,
+        CarPermission $carPermission
+    )
+    {
+        $this->model = $car;
+        $this->service = new CarService($this->model);
+        $this->transformer = $carTransformer;
+        $this->validation = $carValidation;
+        $this->permission = $carPermission;
+    }
+}
+```
+
+### Step 4
+Create the relationship in the user model
+```php
+public function userRole()
+    {
+        return $this->belongsTo('App\Models\v1\UserRole');
+    }
+```
+
+### Step 5
+test
+
+### Dica
+If your controller has more functions than the 4 `index` `show` `store` `update` `destroy` defaults, you can configure it manually as follows:
+```php
+protected $permissions = [
+        'index' => [],
+        'show' => [],
+        'store' => [],
+        'update' => [],
+        'destroy' => [],
+        'other_function_name' => [],
+        'other_function_name2' => [],
+    ];
+```
+
+In your controller add this call at the beginning of the function:
+```php
+$this->hasPermissonSet();
+```
+
+**Change permission logic**
+By default, the BasePermission class tries to take the user's role as follows:
+```php
+return $user->userRole->id;
+```
+
+If you need to change the way to search for the role run the command below:
+```
+php artisan fabio-pv:generate-permission-handle
+```
+
+The command will generate the class 
+```php
+class HandlePermission implements HandlePermissionInterface
+{
+}
+```
+Implement the functions `handle` and `message`
+
+**Handle** </br>
+Here you can change the way to search for the user's role, just don't forget to return role =)
+```php
+ public static function handle($user)
+    {
+        /**
+         * @var User $user
+         */
+        return $user->userRole->id;
+    }
+```
+
+**message**
+Here you can define the message for access denied exception
+```php
+ public static function message(): string
+    {
+        return 'Your users do not have access to this feature';
+    }
+```
+
 
 ## Exception [:arrow_up:](#summary)
 This package has a base class to extend in ```app/Exceptions/Handler.php```. This class will make the return of errors more pleasant for those who use the api

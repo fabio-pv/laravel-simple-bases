@@ -47,6 +47,12 @@ class GenerateEndpointClass extends Command
         $tableName = $this->option('table-name');
         $versionName = $this->option('api-version');
 
+        if(empty($tableName)){
+            echo "\e[0;31mOption '--table-name=' is required\e[0m\n";
+            echo PHP_EOL;
+            return;
+        }
+
         ControllerTemplate::instance()->make($name, $versionName);
         ServiceTemplate::instance()->make($name, $versionName);
         ValidationTemplate::instance()->make($name, $versionName);
