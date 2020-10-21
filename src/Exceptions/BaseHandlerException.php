@@ -11,7 +11,7 @@ use Throwable;
 
 abstract class BaseHandlerException extends ExceptionHandler
 {
-    public function render($request, Throwable $exception)
+    public function render($request, $exception)
     {
 
         if (get_parent_class($exception) === BaseException::class) {
