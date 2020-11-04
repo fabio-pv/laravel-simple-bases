@@ -6,6 +6,7 @@ namespace LaravelSimpleBases\Services;
 
 use Illuminate\Support\Facades\Storage;
 use LaravelSimpleBases\Models\File;
+use LaravelSimpleBases\Utils\FileInterceptorUtil;
 use Webpatser\Uuid\Uuid;
 
 trait FileInterceptor
@@ -23,7 +24,7 @@ trait FileInterceptor
             return;
         }
         $this->fantasyProperty = $config['fantasy_property'];
-        $this->saveLocation = $config['save_location'];
+        $this->saveLocation = FileInterceptorUtil::getSaveLocation($this->model);
         $this->extension = $config['extension'];
     }
 

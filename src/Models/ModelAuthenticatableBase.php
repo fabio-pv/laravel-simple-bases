@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use LaravelSimpleBases\Events\UuidModelEvent;
 use LaravelSimpleBases\Exceptions\ModelNotFoundException;
+use LaravelSimpleBases\Transformers\FileTransformer;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
@@ -43,10 +44,26 @@ abstract class ModelAuthenticatableBase extends Authenticatable implements JWTSu
 
     }
 
+    /**
+     * @return mixed
+     */
     public function files()
     {
         return $this->hasMany(File::class, 'reference_id')
             ->where('reference', get_class($this));
+    }
+
+    /**
+     * @param null $valueToEmpty
+     * @return array|mixed
+     */
+    public function filesToTransformer($valueToEmpty = null)
+    {
+        return fractal_transformer(
+            $this->files,
+            FileTransformer::class,
+            $valueToEmpty
+        );
     }
 
     public function getJWTIdentifier()

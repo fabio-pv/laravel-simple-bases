@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use LaravelSimpleBases\Events\UuidModelEvent;
 use LaravelSimpleBases\Exceptions\ModelNotFoundException;
+use LaravelSimpleBases\Transformers\FileTransformer;
 
 /**
  * Class ModelBase
@@ -46,6 +47,19 @@ abstract class ModelBase extends Model
     {
         return $this->hasMany(File::class, 'reference_id')
             ->where('reference', get_class($this));
+    }
+
+    /**
+     * @param null $valueToEmpty
+     * @return array|mixed
+     */
+    public function filesToTransformer($valueToEmpty = null)
+    {
+        return fractal_transformer(
+            $this->files,
+            FileTransformer::class,
+            $valueToEmpty
+        );
     }
 
 }

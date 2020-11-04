@@ -3,6 +3,7 @@
 namespace LaravelSimpleBases\Transformers;
 
 use LaravelSimpleBases\Models\File;
+use LaravelSimpleBases\Utils\FileInterceptorUtil;
 use League\Fractal\TransformerAbstract;
 
 class FileTransformer extends TransformerAbstract
@@ -26,8 +27,7 @@ class FileTransformer extends TransformerAbstract
     ];
 
     /**
-     * A Fractal transformer.
-     *
+     * @param File $file
      * @return array
      */
     public function transform(File $file)
@@ -36,12 +36,11 @@ class FileTransformer extends TransformerAbstract
             'uuid' => $file->uuid,
             'file' => $file->file,
             'extension' => $file->extension,
-            'url' => config('app.url')
-                .  '/v1/file'
-                . config('model_with_file')[$file->reference]['save_location']
-                . '/'
-            . $file->file
-            . $file->extension
+            'url' => FileInterceptorUtil::makeUrl(
+                $file->reference,
+                $file->file,
+                $file->extension
+            ),
         ];
     }
 }
