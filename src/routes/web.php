@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get(
-    'v1/file/photos/{path}/{photo}',
+    'files/{path}/{photo}',
     '\LaravelSimpleBases\Http\Controllers\FileController@retrive'
 );

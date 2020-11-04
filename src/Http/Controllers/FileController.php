@@ -30,7 +30,7 @@ class FileController
     {
         try {
 
-            $file = Storage::get("photos/${path}/${photo}");
+            $file = Storage::get("files/${path}/${photo}");
             $response = Response::make($file, StatusCodeUtil::OK);
             $response->header("Content-Type", "image/png");
 

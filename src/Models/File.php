@@ -3,6 +3,7 @@
 namespace LaravelSimpleBases\Models;
 
 use LaravelSimpleBases\Models\ModelBase;
+use LaravelSimpleBases\Utils\FileInterceptorUtil;
 
 /**
  * @property integer $id
@@ -44,13 +45,11 @@ class File extends ModelBase
      */
     public function getUrl()
     {
-        return config('app.url')
-            . '/v1/file'
-            . config('model_with_file')[$this->reference]['save_location']
-            . '/'
-            . $this->file
-            . $this->extension;
-
+        return FileInterceptorUtil::makeUrl(
+            $this->reference,
+            $this->file,
+            $this->extension
+        );
     }
 
 }
