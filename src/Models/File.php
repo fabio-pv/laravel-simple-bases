@@ -12,6 +12,7 @@ use LaravelSimpleBases\Utils\FileInterceptorUtil;
  * @property string $extension
  * @property integer $reference_id
  * @property string $reference
+ * @property string $name
  * @property string $created_at
  * @property string $updated_at
  * @property string $deleted_at
@@ -35,6 +36,7 @@ class File extends ModelBase
         'extension',
         'reference_id',
         'reference',
+        'name',
         'created_at',
         'updated_at',
         'deleted_at',

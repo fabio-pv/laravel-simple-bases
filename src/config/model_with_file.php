@@ -3,6 +3,7 @@
 return [
     'model::class' => [
         'fantasy_property' => 'photo',
-        'extension' => '.png'
+        'extension' => '.png',
+        'name' => 'optional',
     ],
 ];

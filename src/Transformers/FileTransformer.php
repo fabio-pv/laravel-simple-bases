@@ -36,6 +36,7 @@ class FileTransformer extends TransformerAbstract
             'uuid' => $file->uuid,
             'file' => $file->file,
             'extension' => $file->extension,
+            'name' => $file->name,
             'url' => FileInterceptorUtil::makeUrl(
                 $file->reference,
                 $file->file,
