@@ -15,6 +15,7 @@ trait FileInterceptor
     private $saveLocation;
     private $extension;
     private $lastUuid;
+    private $name;
 
 
     private function initializeVariable()
@@ -23,9 +24,11 @@ trait FileInterceptor
         if (empty($config)) {
             return;
         }
+
         $this->fantasyProperty = $config['fantasy_property'];
         $this->saveLocation = FileInterceptorUtil::getSaveLocation($this->model);
         $this->extension = $config['extension'];
+        $this->name = $config['name'] ?? null;
     }
 
     protected function interceptFile()
@@ -97,6 +100,7 @@ trait FileInterceptor
         $file->extension = $this->extension;
         $file->reference_id = $this->model->id;
         $file->reference = get_class($this->model);
+        $file->name = $this->name;
         $file->save();
 
     }
