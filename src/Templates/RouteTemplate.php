@@ -4,6 +4,8 @@
 namespace LaravelSimpleBases\Templates;
 
 
+use Illuminate\Support\Facades\App;
+
 class RouteTemplate
 {
     public static function make(string $name, string $version = null): void
@@ -20,11 +22,11 @@ class RouteTemplate
 
         $data = PHP_EOL . '/**
 * Route generate by laravel-simple-base
-* Realize os ajuste necessarios antes de usar
+* Make the necessary adjustments before using
 */' . PHP_EOL;
         $routeTemplate->write($dest, $data);
 
-        $data = $routeTemplate->routeForLessEqualLaravel7($version, $newName, $name);
+        $data = $routeTemplate->makeRouteByVerionLaravel($routeTemplate, $version, $newName, $name);
         $routeTemplate->write($dest, $data);
 
         echo 'Create new Route in api.php';
@@ -32,9 +34,28 @@ class RouteTemplate
 
     }
 
+    private function makeRouteByVerionLaravel($instance, $version, $newName, $name)
+    {
+        if (App::version() >= '8.0') {
+            return $instance->routeForLessEqualLaravel8($version, $newName, $name);
+        }
+        return $instance->routeForLessEqualLaravel7($version, $newName, $name);
+    }
+
     private function routeForLessEqualLaravel7(string $version, string $nameRoute, string $nameController)
     {
         return "Route::apiResource('{$version}/{$nameRoute}', '${version}\\{$nameController}Controller');";
+    }
+
+    private function routeForLessEqualLaravel8(string $version, string $nameRoute, string $nameController)
+    {
+        $controller = '\App\Http\Controllers\\'
+            . $version
+            . '\\'
+            . $nameController
+            . 'Controller::class';
+
+        return "Route::apiResource('{$version}/{$nameRoute}', $controller);";
     }
 
     private function write(string $dest, string $data)
