@@ -1,5 +1,5 @@
 {
-  "version": "0.7.4",
+  "version": "0.8.0",
   "name": "fabio-pv/laravel-simple-bases",
   "description": "A set of base classes to help create projects with Laravel",
   "homepage": "https://github.com/fabio-pv/laravel-simple-bases",
