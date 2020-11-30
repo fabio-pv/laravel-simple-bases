@@ -55,10 +55,15 @@ abstract class BaseValidation
     private function makeMessage(MessageBag $erros)
     {
 
-        $exception = new ValidationFieldException('your request does not meet the requirements');
+        $exception = new ValidationFieldException($this->getDefaultMessage());
         $exception->setFields($erros->getMessages());
 
         throw $exception;
 
+    }
+    
+    protected function getDefaultMessage()
+    {
+        return 'Your request does not meet the requirements';
     }
 }
