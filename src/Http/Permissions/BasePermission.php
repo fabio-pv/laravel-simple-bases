@@ -29,7 +29,7 @@ abstract class BasePermission
             return;
         }
 
-        if (in_array($handleRole, $needRole)) {
+        if (!empty(array_intersect($needRole, $handleRole))) {
             return;
         }
 
@@ -54,8 +54,7 @@ abstract class BasePermission
 
     private function getHandlerDefault($user = null)
     {
-        return $user->userRole->id;
+        return $user->userRole()->pluck('id')->toArray();
     }
-
 
 }
