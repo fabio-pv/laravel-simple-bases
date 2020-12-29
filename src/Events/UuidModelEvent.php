@@ -25,7 +25,7 @@ class UuidModelEvent
         if (!in_array('uuid', $model->getFillable())) {
             return;
         }
-        $model->uuid = Uuid::generate()->string;
+        $model->uuid = $model->uuid ?: Uuid::generate()->string;
     }
 
     /**
