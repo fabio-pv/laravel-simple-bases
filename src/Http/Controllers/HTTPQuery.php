@@ -120,7 +120,7 @@ trait HTTPQuery
     private function makeOrder($orderArray)
     {
         foreach($orderArray as $column => $direction) {
-            $this->retrive->orderBy($column, $direction);
+            $this->retrive = $this->retrive->orderBy($column, $direction);
         }
     }
 
