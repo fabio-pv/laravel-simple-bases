@@ -117,14 +117,11 @@ trait HTTPQuery
 
     }
 
-    private function makeOrder($order)
+    private function makeOrder($orderArray)
     {
-
-        $key = key($order);
-        $value = array_values($order)[0];
-
-        $this->retrive = $this->retrive->orderBy($key, $value);
-
+        foreach($orderArray as $column => $direction) {
+            $this->retrive->orderBy($column, $direction);
+        }
     }
 
     public function paginate()
