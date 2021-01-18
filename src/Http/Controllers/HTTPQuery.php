@@ -53,7 +53,7 @@ trait HTTPQuery
 
     }
 
-    private function doWhereAuto($query, string $column, string $operator, string $value)
+    private function doWhereAuto($query, string $column, string $operator, $value = null)
     {
 
         if ($operator === 'like') {
@@ -71,6 +71,13 @@ trait HTTPQuery
         $column = $relation[(count($relation) - 1)];
         array_pop($relation);
         $relation = $this->makeRelationForJoin($relation);
+
+        if ($value === null) {
+
+            $this->retrive = $this->retrive
+                ->doesntHave($relation);
+            return;
+        }
 
         $this->retrive = $this->retrive
             ->whereHas($relation,
@@ -119,7 +126,7 @@ trait HTTPQuery
 
     private function makeOrder($orderArray)
     {
-        foreach($orderArray as $column => $direction) {
+        foreach ($orderArray as $column => $direction) {
             $this->retrive = $this->retrive->orderBy($column, $direction);
         }
     }
