@@ -4,15 +4,25 @@
 namespace LaravelSimpleBases\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Builder;
+use LaravelSimpleBases\Exceptions\ValidationException;
 
 const COLUMN_VALUE_DELIMITER = '@';
 const JOIN_DELIMITER = '.';
+
 const OPERATOR = [
+
     'equal' => '=',
     'not_equal' => '!=',
     'greater_than_or_equal_to' => '>=',
     'less_than_or_equal_to' => '<=',
-    'like' => 'like'
+    'like' => 'like',
+    'lt' => '<',
+    'gt' => '>',
+    'eq' => '=',
+    'ne' => '!=',
+    'gte' => '>=',
+    'lte' => '<=',
+
 ];
 
 const PAGINATE_DEFAULT = 10;
@@ -38,18 +48,33 @@ trait HTTPQuery
     private function makeFilter($filter)
     {
 
-        $keyAndOperator = explode(COLUMN_VALUE_DELIMITER, key($filter));;
+        try {
 
-        $key = $keyAndOperator[0];
-        $operator = OPERATOR[$keyAndOperator[1]];
-        $value = array_values($filter)[0];
+            $keyAndOperator = explode(COLUMN_VALUE_DELIMITER, key($filter));;
 
-        if (strpos($key, JOIN_DELIMITER)) {
-            $this->whereJoin($key, $operator, $value);
-            return;
+            $key = $keyAndOperator[0];
+
+            if (!array_key_exists($keyAndOperator[1], OPERATOR)) {
+                throw new ValidationException(
+                    "Operator '" .
+                    $keyAndOperator[1] .
+                    "' for the filter is not available"
+                );
+            }
+
+            $operator = OPERATOR[$keyAndOperator[1]];
+            $value = array_values($filter)[0];
+
+            if (strpos($key, JOIN_DELIMITER)) {
+                $this->whereJoin($key, $operator, $value);
+                return;
+            }
+
+            $this->retrive = $this->doWhereAuto($this->retrive, $key, $operator, $value);
+
+        } catch (\Exception $e) {
+            throw $e;
         }
-
-        $this->retrive = $this->doWhereAuto($this->retrive, $key, $operator, $value);
 
     }
 
