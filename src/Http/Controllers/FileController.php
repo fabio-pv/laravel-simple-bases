@@ -30,9 +30,12 @@ class FileController
     {
         try {
 
-            $file = Storage::get("files/${path}/${photo}");
+            $pathMake = "files/${path}/${photo}";
+
+            $file = Storage::get($pathMake);
+            $contentType = mime_content_type(Storage::readStream($pathMake));
             $response = Response::make($file, StatusCodeUtil::OK);
-            $response->header("Content-Type", "image/png");
+            $response->header("Content-Type", $contentType);
 
             return $response;
 
