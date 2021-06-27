@@ -34,6 +34,14 @@ trait ComplexQueryService
     private function getRealData($fromToData, $data, $key)
     {
         if(empty($data)){
+            if ($fromToData['nullable'] != true) {
+                throw new ModelNotFoundException(
+                    'Resource can not be null to property: ' . $key
+                );
+            }
+
+            $this->realProperties[$fromToData['property']] = null;
+
             return;
         }
         /**

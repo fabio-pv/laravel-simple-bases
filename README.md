@@ -350,7 +350,6 @@ return [
         ],
     ]
 ];
-
 ```
 
 How to configure ?</br>
@@ -377,6 +376,23 @@ return [
 
 ### Step 3
 Test, if everything went well using the method post or patch and passing the relationship you should have the relationship in your database automatically
+
+### Optional
+
+If you need to some nullable convertions add **nullable: true** to your configuration, just like the exemple below:
+
+```php
+return [
+    'model::class' => [
+        'property_param' => [
+            'model' => 'Model::class',
+            'property' => 'property_database',
+            'nullable' => true
+        ],
+    ]
+];
+```
+
 
 ## Intercept base64 to file [:arrow_up:](#summary)
 This package provides an easy way to implement file upload via base64 on any model you want.</br>
