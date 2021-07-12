@@ -20,8 +20,8 @@ class FileInterceptorUtil
         $array = explode('\\', $model);
         $lastIndex = array_key_last(explode('\\', $model));
 
-        return config('app.url')
-            . '/files/'
+        return config('filesystems.bucket_url', config('app.url'))
+	    . '/files/'
             . strtolower($array[$lastIndex])
             . '/'
             . $file
