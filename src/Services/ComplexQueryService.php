@@ -33,9 +33,11 @@ trait ComplexQueryService
 
     private function getRealData($fromToData, $data, $key)
     {
-        if(empty($data)){
+        if (empty($data)) {
+            $this->realProperties[$fromToData['property']] = null;
             return;
         }
+
         /**
          * @var ModelBase $model
          */
@@ -43,7 +45,7 @@ trait ComplexQueryService
         $model = $model->findByUuid($data);
         if (empty($model)) {
             throw new ModelNotFoundException(
-                'Resource not found to property: '. $key
+                'Resource not found to property: ' . $key
             );
         }
         $this->realProperties[$fromToData['property']] = $model->id;

@@ -350,7 +350,6 @@ return [
         ],
     ]
 ];
-
 ```
 
 How to configure ?</br>
