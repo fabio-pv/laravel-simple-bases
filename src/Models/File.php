@@ -20,6 +20,12 @@ use LaravelSimpleBases\Utils\FileInterceptorUtil;
  */
 class File extends ModelBase
 {
+    public function __construct(array $attributes = [], string $connection = null)
+    {
+        parent::__construct($attributes);
+        $this->connection = $connection;
+    }
+
     /**
      * The "type" of the auto-incrementing ID.
      *
