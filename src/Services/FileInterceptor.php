@@ -128,7 +128,6 @@ trait FileInterceptor
 
     private function getModelByConnection($photo_uuid)
     {
-        $file = null;
         if (!empty($this->fileInterceptorConnection)) {
             return File::on($this->fileInterceptorConnection)
                 ->where('uuid', $photo_uuid)
