@@ -11,6 +11,8 @@ use Webpatser\Uuid\Uuid;
 
 trait FileInterceptor
 {
+    protected $fileInterceptorConnection = '';
+
     private $fantasyProperty;
     private $saveLocation;
     private $extension;
@@ -33,7 +35,7 @@ trait FileInterceptor
             return;
         }
 
-        foreach ($config as $item){
+        foreach ($config as $item) {
             $this->start($item);
         }
     }
@@ -95,10 +97,13 @@ trait FileInterceptor
 
     private function saveFileNameInDB($photo_uuid = null)
     {
-        $file = new File();
+        $file = new File(
+            [],
+            $this->fileInterceptorConnection
+        );
 
         if (!empty($photo_uuid)) {
-            $file = File::findByUuid($photo_uuid);
+            $file = $this->getModelByConnection($photo_uuid);
         }
 
         $file->file = $this->lastUuid;
@@ -112,15 +117,25 @@ trait FileInterceptor
 
     private function deleteFileInDB($photo, $photo_uuid = null): bool
     {
-
         if ($photo !== 'null') {
             return false;
         }
 
-        $file = File::findByUuid($photo_uuid);
-        $file->delete();
+        $this->getModelByConnection($photo_uuid)->delete();
 
         return true;
-
     }
+
+    private function getModelByConnection($photo_uuid)
+    {
+        if (!empty($this->fileInterceptorConnection)) {
+            return File::on($this->fileInterceptorConnection)
+                ->where('uuid', $photo_uuid)
+                ->get()
+                ->first();
+        }
+
+        return File::findByUuid($photo_uuid);
+    }
+
 }
