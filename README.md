@@ -235,14 +235,15 @@ In the current version the filter only works for the model's main table.</br>
 ### Filters [:arrow_up:](#summary)
 
 ```
-{{url}}/api/v1/car?filters[index_filter][name_column@name_operator]=value
-{{url}}/api/v1/car?filters[0][name@equal]=Mustang boss 302 68
+{{url}}/api/v1/car?filters[index_filter][name_column@name_operator:where_type]=value
+{{url}}/api/v1/car?filters[0][name@equal:and]=Mustang boss 302 68
 ```
 
 **index_filter** = Array index for the filter string</br>
 **name_column** = Name of the column to be applied the filter</br>
 **name_operator** = Operator to be applied to the filter ``` equal, not_equal, greater_than_or_equal_to, less_than_or_equal_to, like  ```</br>
 **value** = Value for the filter</br>
+**where_type** = Type of filter ``and`` or ``or``
 
 #### Filter on related tables
 As of version v0.3.0, the filter also works with the related tables.
