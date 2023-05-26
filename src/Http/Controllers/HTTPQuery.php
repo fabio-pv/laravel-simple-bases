@@ -8,7 +8,6 @@ use LaravelSimpleBases\Exceptions\ValidationException;
 
 const COLUMN_VALUE_DELIMITER = '@';
 const JOIN_DELIMITER = '.';
-const TYPE_WHERE_DELIMITER = ':';
 
 const OPERATOR = [
 
@@ -17,13 +16,13 @@ const OPERATOR = [
     'greater_than_or_equal_to' => '>=',
     'less_than_or_equal_to' => '<=',
     'like' => 'like',
+    'not_like' => 'not like',
     'lt' => '<',
     'gt' => '>',
     'eq' => '=',
     'ne' => '!=',
     'gte' => '>=',
     'lte' => '<=',
-    'not_like' => 'not like',
 
 ];
 
@@ -49,69 +48,58 @@ trait HTTPQuery
 
     private function makeFilter($filter)
     {
-
         try {
 
-            $keyOperatorWhere = explode(COLUMN_VALUE_DELIMITER, key($filter));
-            $keyOperatorWhere[2] = explode(TYPE_WHERE_DELIMITER, $keyOperatorWhere[1])[1];
-            $keyOperatorWhere[1] = explode(TYPE_WHERE_DELIMITER, $keyOperatorWhere[1])[0];
+            $keyAndOperator = explode(COLUMN_VALUE_DELIMITER, key($filter));;
 
-            $key = $keyOperatorWhere[0];
+            $key = $keyAndOperator[0];
 
-            if (!array_key_exists($keyOperatorWhere[1], OPERATOR)) {
+            if (!array_key_exists($keyAndOperator[1], OPERATOR)) {
                 throw new ValidationException(
                     "Operator '" .
-                    $keyOperatorWhere[1] .
+                    $keyAndOperator[1] .
                     "' for the filter is not available"
                 );
             }
 
-            $operator = OPERATOR[$keyOperatorWhere[1]];
-            $type = $keyOperatorWhere[2];
+            $operator = OPERATOR[$keyAndOperator[1]];
             $value = array_values($filter)[0];
 
+            // remover or
             if (strpos($key, JOIN_DELIMITER)) {
-                $this->whereJoin($key, $operator, $value, $type);
+                $this->whereJoin($key, $operator, $value);
                 return;
             }
 
-            $this->retrive = $this->doWhereAuto($this->retrive, $key, $operator, $value, $type);
+            $this->retrive = $this->doWhereAuto($this->retrive, $key, $operator, $value);
 
         } catch (\Exception $e) {
             throw $e;
         }
-
     }
 
-    private function doWhereAuto($query, string $column, string $operator, $value = null, string $type)
+    private function doWhereAuto($query, string $column, string $operator, $value = null)
     {
-
         if ($operator === 'like' || $operator === 'not like') {
             $value = "%$value%";
         }
 
-        if ($type === 'and') {
-            $query = $query->where($column, $operator, $value);
+        if (str_contains($column, 'or:')) {
+            $column = str_replace('or:', '', $column);
+            return $query->orWhere($column, $operator, $value);
         }
 
-        if($type === 'or') {
-            $query = $query->orWhere($column, $operator, $value);
-        }
-
-        return $query;
-
+        return $query->where($column, $operator, $value);
     }
 
-    private function whereJoin(string $key, string $operador, $value, string $type): void
+    private function whereJoin(string $key, string $operador, $value): void
     {
-
         $relation = explode('.', $key);
         $column = $relation[(count($relation) - 1)];
         array_pop($relation);
         $relation = $this->makeRelationForJoin($relation);
 
         if ($value === null) {
-
             $this->retrive = $this->retrive
                 ->doesntHave($relation);
             return;
@@ -120,10 +108,8 @@ trait HTTPQuery
         $this->retrive = $this->retrive
             ->whereHas($relation,
                 function (Builder $query)
-                use ($column, $operador, $value, $type) {
-
-                    return $this->doWhereAuto($query, $column, $operador, $value, $type);
-
+                use ($column, $operador, $value) {
+                    return $this->doWhereAuto($query, $column, $operador, $value);
                 });
     }
 
