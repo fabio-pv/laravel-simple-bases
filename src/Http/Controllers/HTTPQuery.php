@@ -16,6 +16,7 @@ const OPERATOR = [
     'greater_than_or_equal_to' => '>=',
     'less_than_or_equal_to' => '<=',
     'like' => 'like',
+    'not_like' => 'not like',
     'lt' => '<',
     'gt' => '>',
     'eq' => '=',
@@ -47,7 +48,6 @@ trait HTTPQuery
 
     private function makeFilter($filter)
     {
-
         try {
 
             $keyAndOperator = explode(COLUMN_VALUE_DELIMITER, key($filter));;
@@ -65,6 +65,7 @@ trait HTTPQuery
             $operator = OPERATOR[$keyAndOperator[1]];
             $value = array_values($filter)[0];
 
+            // remover or
             if (strpos($key, JOIN_DELIMITER)) {
                 $this->whereJoin($key, $operator, $value);
                 return;
@@ -75,30 +76,30 @@ trait HTTPQuery
         } catch (\Exception $e) {
             throw $e;
         }
-
     }
 
     private function doWhereAuto($query, string $column, string $operator, $value = null)
     {
-
-        if ($operator === 'like') {
+        if ($operator === 'like' || $operator === 'not like') {
             $value = "%$value%";
         }
 
-        return $query->where($column, $operator, $value);
+        if (str_contains($column, 'or:')) {
+            $column = str_replace('or:', '', $column);
+            return $query->orWhere($column, $operator, $value);
+        }
 
+        return $query->where($column, $operator, $value);
     }
 
     private function whereJoin(string $key, string $operador, $value): void
     {
-
         $relation = explode('.', $key);
         $column = $relation[(count($relation) - 1)];
         array_pop($relation);
         $relation = $this->makeRelationForJoin($relation);
 
         if ($value === null) {
-
             $this->retrive = $this->retrive
                 ->doesntHave($relation);
             return;
@@ -108,9 +109,7 @@ trait HTTPQuery
             ->whereHas($relation,
                 function (Builder $query)
                 use ($column, $operador, $value) {
-
                     return $this->doWhereAuto($query, $column, $operador, $value);
-
                 });
     }
 
