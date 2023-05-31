@@ -6,7 +6,7 @@
         <img src="https://poser.pugx.org/fabio/laravel-simple-bases/license">
 </p>
 
-## Summary   
+## Summary
 :computer: &nbsp; [Installation](#installation-arrow_up)</br>
 :lock: &nbsp; [Configuration authentication with JWT](#configuration-authentication-with-jwt-arrow_up)</br>
 :satellite: &nbsp; [Creating an endpoint](#creating-an-endpoint-arrow_up)</br>
@@ -22,7 +22,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:keycap_ten: &nbsp; [fractal_transformer](#fractal_transformer-arrow_up)</br>
 
 ## About
-This package creates an initial base and utilities for your Laravel projects with a focus on REST api.</br> 
+This package creates an initial base and utilities for your Laravel projects with a focus on REST api.</br>
 Containing the following resources:
 * Base class for authentication using JWT (package)
 * Base class for models, with uuid and additional functions
@@ -145,7 +145,7 @@ This command will create 5 classes in your versioned project in the v1 directory
 
 ### Step 3 **Optional**
 If you want to validate the request body, you must implement its rules in **App/Http/Validations/v1** </br>
-This validation works using Laravel [validation](https://laravel.com/docs/7.x/validation) through the base class   
+This validation works using Laravel [validation](https://laravel.com/docs/7.x/validation) through the base class
 ```php
 $this->fieldsCreate = [
         'name' => 'required',
@@ -174,25 +174,25 @@ Create your route in routes/api.php
 Route::resource('v1/car', 'v1\CarController');
 ```
 
-### Step 6 
+### Step 6
 Test, if everything goes well you will have an endpoint working with the functions:
 * GET with pagination
 ```
 /api/v1/car
 ```
-* GET 
+* GET
 ```
 /api/v1/car/{uuid}
 ```
-* POST  
+* POST
 ```
 /api/v1/car
 ```
-* PATCH 
+* PATCH
 ```
 /api/v1/car/{uuid}
 ```
-* DELETE 
+* DELETE
 ```
 /api/v1/car/{uuid}
 ```
@@ -200,30 +200,30 @@ Test, if everything goes well you will have an endpoint working with the functio
 **Ex.:**
 ```json
 {
-    "data": [
-        {
-            "uuid": "d96598d0-c527-11ea-b192-517bb6c42efa",
-            "name": "Mustang boss 302 68",
-            "license_plate": "ter-1234",
-            "motor_power": 290
-        },
-        {
-            "uuid": "44d54ed0-c528-11ea-96f6-658ec4d2da56",
-            "name": "Camaro ss 68",
-            "license_plate": "ter-4321",
-            "motor_power": 295
-        }
-    ],
-    "meta": {
-        "pagination": {
-            "total": 2,
-            "count": 2,
-            "per_page": 10,
-            "current_page": 1,
-            "total_pages": 1,
-            "links": {}
-        }
+  "data": [
+    {
+      "uuid": "d96598d0-c527-11ea-b192-517bb6c42efa",
+      "name": "Mustang boss 302 68",
+      "license_plate": "ter-1234",
+      "motor_power": 290
+    },
+    {
+      "uuid": "44d54ed0-c528-11ea-96f6-658ec4d2da56",
+      "name": "Camaro ss 68",
+      "license_plate": "ter-4321",
+      "motor_power": 295
     }
+  ],
+  "meta": {
+    "pagination": {
+      "total": 2,
+      "count": 2,
+      "per_page": 10,
+      "current_page": 1,
+      "total_pages": 1,
+      "links": {}
+    }
+  }
 }
 ```
 
@@ -235,15 +235,14 @@ In the current version the filter only works for the model's main table.</br>
 ### Filters [:arrow_up:](#summary)
 
 ```
-{{url}}/api/v1/car?filters[index_filter][name_column@name_operator:where_type]=value
-{{url}}/api/v1/car?filters[0][name@equal:and]=Mustang boss 302 68
+{{url}}/api/v1/car?filters[index_filter][name_column@name_operator]=value
+{{url}}/api/v1/car?filters[0][name@equal]=Mustang boss 302 68
 ```
 
 **index_filter** = Array index for the filter string</br>
 **name_column** = Name of the column to be applied the filter</br>
 **name_operator** = Operator to be applied to the filter ``` equal, not_equal, greater_than_or_equal_to, less_than_or_equal_to, like  ```</br>
 **value** = Value for the filter</br>
-**where_type** = Type of filter ``and`` or ``or``
 
 #### Filter on related tables
 As of version v0.3.0, the filter also works with the related tables.
@@ -288,7 +287,7 @@ Assuming we want all **user** who have **car** of **car_type** equal to **'Sport
 The functioning of the filters depends on the following requirements:
 * The name of the properties in transformer must be the same as the database tables. (This is related to usability)
 * The relationships in the transformer must follow the same name as the models only separated by '_'. </br>
-Model
+  Model
 ```php
 public function carType()
 ```
@@ -629,7 +628,7 @@ If you need to change the way to search for the role run the command below:
 php artisan fabio-pv:generate-permission-handle
 ```
 
-The command will generate the class 
+The command will generate the class
 ```php
 class HandlePermission implements HandlePermissionInterface
 {
@@ -749,7 +748,6 @@ public function transform(User $user)
     ]
 }
 ```
-
 
 
 
